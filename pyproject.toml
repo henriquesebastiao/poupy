@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "poupy"
+version = "0.1.0"
+description = "Poupy project"
+authors = ["Henrique Sebastião <contato@henriquesebastiao.com>"]
+license = "GPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.7"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.12.0"
+blue = "^0.9.1"
+ruff = "^0.1.5"
+isort = "^5.12.0"
+pytest = "^7.4.3"
+pytest-django = "^4.7.0"
+coverage = "^7.3.2"
+pytest-cov = "^4.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+exclude = ['migrations']
+
+[tool.isort]
+profile = "black"
+line_length = 79
+extend_skip = ['migrations']
+
+[tool.blue]
+extend-exclude = '(migrations/)'
+
+[tool.pytest.ini_options]
+pythonpath = "."
+DJANGO_SETTINGS_MODULE = "project.settings"
+python_files = "test.py tests.py test_*.py tests_*.py *_test.py *_tests.py"
+addopts = "--doctest-modules --strict-markers -v"
+
+[tool.coverage.run]
+branch = true
+omit = ["**/*test*.py", "manage.py", "**/migrations/*", "**/project/*.py"]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.taskipy.tasks]
+lint = 'ruff . && blue --check . --diff'
+format = 'blue .  && isort .'
+test = 'pytest -s -x --cov=project -vv'
+coverage = 'coverage run -m pytest && coverage html'
