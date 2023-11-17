@@ -1,12 +1,26 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Poupy</title>
-    {% include 'partials/website/head.html' %}
+    {% include 'partials/head.html' %}
+    <link rel="stylesheet" href="{% static 'css/website/header.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/website/main.css' %}" type="text/css"/>
 </head>
+
 <body>
     {% include 'partials/website/header.html' %}
+    <main class="main-content">
+        <div class="main-website-text">
+            <h1>Gerencie suas finanças de forma simples e eficiente.</h1>
+            <p>
+                Poupy é um sistema de controle financeiro pessoal que permite que você
+                gerencie suas finanças de forma simples e eficiente.
+            </p>
+        </div>
+    </main>
 </body>
+
 </html>
