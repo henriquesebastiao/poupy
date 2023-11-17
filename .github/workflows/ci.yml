@@ -1,0 +1,23 @@
+on: [push, pull_request]
+
+name: CI
+
+jobs:
+  ruff:
+    name: Ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chartboost/ruff-action@v1
+        with:
+          version: "0.1.3"
+
+  isort:
+    name: Isort
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: isort/isort-action@v1
+        with:
+            requirements-files: "requirements_dev.txt"
+            configuration: "--profile black -l 79 --extend-skip migrations"
