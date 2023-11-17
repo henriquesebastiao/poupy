@@ -3,7 +3,7 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Poupy</title>
     {% include 'partials/head.html' %}
     <link rel="stylesheet" href="{% static 'css/app/header.css' %}" type="text/css"/>
@@ -11,11 +11,13 @@
 </head>
 
 <body>
-    {% include 'partials/app/header.html' %}
-    <main class="main-content">
-        <div class="overview-card">
+{% include 'partials/app/header.html' %}
+<main class="main-content">
+    <div class="horizontal-section primary-card overview-card">
+        <div class="overview-info-container">
             <div class="overview-welcome">
                 <h2>Olá, Henrique! 😊</h2>
+                <button class="vision-button" type="submit"><i class="fa-regular fa-eye"></i></button>
             </div>
             <div class="overview-info">
                 <div class="overview-info-card monthly-income">
@@ -28,14 +30,52 @@
                     <span class="value value-negative">R$ 500,00</span>
                 </div>
 
-                <!-- Saldo Geral -->
+                <!-- Saldo Total -->
                 <div class="overview-info-card monthly-income">
-                    <span class="overview-info-card-title">Saldo Geral</span>
-                    <span class="value general-balance-value">R$ 500,00</span>
+                    <span class="overview-info-card-title">Saldo Total</span>
+                    <span class="value value-general">R$ 500,00</span>
                 </div>
             </div>
         </div>
-    </main>
+        <div class="overview-divider"></div>
+        <div class="overview-actions-container">
+            <a href="#">
+                <div class="overview-actions-card">
+                    <i class="actions-icon value-negative fa-solid fa-circle-minus"></i>
+                    <span class="value-negative">Despesa</span>
+                </div>
+            </a>
+            <a href="#">
+                <div class="overview-actions-card">
+                    <i class="actions-icon value-positive fa-solid fa-circle-plus"></i>
+                    <span class="value-positive">Receita</span>
+                </div>
+            </a>
+            <a href="#">
+                <div class="overview-actions-card">
+                    <i class="actions-icon value-general fa-solid fa-money-bill-transfer"></i>
+                    <span class="value-general">Transferência</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="horizontal-section transaction-history-and-list-accounts">
+        <div class="list-accounts primary-card">
+            <div class="inner-margin">
+                <div><span>Minhas Contas</span></div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="transaction-history primary-card">
+            <div class="inner-margin">
+                <span>HISTÓRICO</span>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 
 </html>

@@ -7,5 +7,5 @@ def home(request):
         'pages/website/home.html',
         context={
             'logo_name_url': 'home',
-        }
+        },
     )

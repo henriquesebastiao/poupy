@@ -2,27 +2,56 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    row-gap: 1rem;
+    margin-bottom: 5rem; /* temporário */
+}
+
+.horizontal-section {
+    width: 80%;
+}
+
+.primary-card {
+    background: var(--color-surface-800);
+    box-shadow: 0 0 5px var(--color-surface-900);
+    border: var(--color-surface-600) 1px solid;
+    border-radius: var(--theme-rounded-base);
+}
+
+.inner-margin {
+    margin: 2rem;
 }
 
 .overview-card {
     margin-top: 2rem;
-    background: var(--color-surface-800);
-    width: 80%;
-    height: 15rem;
-    border-radius: var(--theme-rounded-base);
+    height: 17rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
+}
+
+.overview-info-container {
+    display: flex;
+    justify-content: center;
     flex-direction: column;
+    row-gap: 1.5rem;
 }
 
 .overview-welcome {
-    margin-top: 3rem;
     user-select: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vision-button {
+    font-size: 1.5rem;
+    background: transparent;
+    margin-right: 85px;
 }
 
 .overview-info {
-    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,6 +74,40 @@
     user-select: none;
 }
 
+.overview-divider {
+    width: 1px;
+    height: 100%;
+    background: var(--color-surface-500);
+}
+
+.overview-actions-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.overview-actions-card {
+    width: 200px;
+    height: 60px;
+    background: var(--color-surface-500);
+    border-radius: var(--theme-rounded-base);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 0 15px var(--color-surface-900);
+    transition: transform .2s ease-in-out;
+}
+
+.overview-actions-card:hover {
+    transform: scale(1.05);
+}
+
+.actions-icon {
+    font-size: 1.5rem;
+}
+
 .value {
     font-size: 1.4rem;
     font-weight: bold;
@@ -58,6 +121,25 @@
     color: var(--color-error-500);
 }
 
-.general-balance-value {
+.value-general {
     color: var(--color-surface-100);
+}
+
+.transaction-history-and-list-accounts {
+    display: flex;
+    column-gap: 1rem;
+}
+
+.transaction-history {
+    width: 50%;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-accounts {
+    width: 50%;
+    height: 30rem;
+    display: flex;
 }

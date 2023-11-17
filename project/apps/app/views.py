@@ -7,5 +7,5 @@ def app(request):
         'pages/app/home.html',
         context={
             'logo_name_url': 'app',
-        }
+        },
     )
