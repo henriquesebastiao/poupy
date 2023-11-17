@@ -1,0 +1,54 @@
+{
+    "python.testing.pytestArgs": [
+        "project"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.defaultInterpreterPath": "/home/hick/.cache/pypoetry/virtualenvs/poupy-KJ2dqG2S-py3.11/bin",
+    "[html]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "vscode.html-language-features",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": true,
+            "strings": true,
+        },
+    },
+    "[django-html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "HookyQR.beautify",
+    },
+    "beautify.language": {
+        "html": ["htm", "html", "django-html"]
+      },
+    "files.associations": {
+        "*.js": "javascript",
+        "*.jsx": "javascriptreact",
+        "*.xml": "html",
+        "*.svg": "html",
+        "*.html": "html",
+        "django-html": "html", // batisteo.vscode-django
+        "**/*.html": "html",
+        "**/templates/*.html": "django-html",
+        "**/templates/**/*.html": "django-html",
+        "**/base_templates/**/*.html": "django-html",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html", // batisteo.vscode-django
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+    "editor.tabSize": 4,
+    "editor.indentSize": "tabSize",
+    "beautify.config": {
+        "ident_size": 4,
+        "indent_char": " ",
+        "indent_with_tabs": false,
+    },
+    "cSpell.words": [
+        "Poupy",
+        "fontawesomefree",
+    ],
+    "git.ignoreLimitWarning": true
+}

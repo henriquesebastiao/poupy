@@ -1,0 +1,24 @@
+.buttons-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Para alinhar text dos menus com o botão de CADASTRE-SE */
+.menu-item{
+    margin-top: 3px;
+}
+
+.register-button {
+    color: var(--color-surface-700);
+    font-weight: 600;
+    padding: 7px;
+    border-radius: var(--theme-rounded-base);
+    margin-left: .5rem;
+    background: var(--color-success-400);
+    transition: background .2s ease-in-out;
+}
+
+.register-button:hover {
+    background: var(--color-success-500);
+}

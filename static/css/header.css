@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0;
+    background: var(--color-surface-700);
+}
+
+.logo-name a {
+    color: var(--color-success-400);
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+}

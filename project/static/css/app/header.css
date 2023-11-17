@@ -1,0 +1,14 @@
+.menu-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .7rem;
+}
+
+.menu-right-icons {
+    transition: color .2s ease-in-out;
+}
+
+.menu-right-icons:hover {
+    color: var(--color-success-400);
+}

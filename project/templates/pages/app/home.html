@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Poupy</title>
+    {% include 'partials/head.html' %}
+    <link rel="stylesheet" href="{% static 'css/app/header.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/app/main.css' %}" type="text/css"/>
+</head>
+
+<body>
+    {% include 'partials/app/header.html' %}
+    <main class="main-content">
+        <div class="overview-card">
+            <div class="overview-welcome">
+                <h2>Olá, Henrique! 😊</h2>
+            </div>
+            <div class="overview-info">
+                <div class="overview-info-card monthly-income">
+                    <span class="overview-info-card-title">Renda Mensal</span>
+                    <span class="value value-positive">R$ 1500,00</span>
+                </div>
+
+                <div class="overview-info-card monthly-income">
+                    <span class="overview-info-card-title">Despesa Mensal</span>
+                    <span class="value value-negative">R$ 500,00</span>
+                </div>
+
+                <!-- Saldo Geral -->
+                <div class="overview-info-card monthly-income">
+                    <span class="overview-info-card-title">Saldo Geral</span>
+                    <span class="value general-balance-value">R$ 500,00</span>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
