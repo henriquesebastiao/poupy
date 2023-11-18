@@ -16,7 +16,7 @@
     <div class="horizontal-section primary-card overview-card">
         <div class="overview-info-container">
             <div class="overview-welcome">
-                <h2>Olá, Henrique! 😊</h2>
+                <h2>Olá, {{ user_first_name }}! 😊</h2>
                 <button class="vision-button" type="submit"><i class="fa-regular fa-eye"></i></button>
             </div>
             <div class="overview-info">
@@ -33,7 +33,7 @@
                 <!-- Saldo Total -->
                 <div class="overview-info-card monthly-income">
                     <span class="overview-info-card-title">Saldo Total</span>
-                    <span class="value value-general">R$ 500,00</span>
+                    <span class="value value-general">R$ {{ total_balance }}</span>
                 </div>
             </div>
         </div>
@@ -62,16 +62,47 @@
     <div class="horizontal-section transaction-history-and-list-accounts">
         <div class="list-accounts primary-card">
             <div class="inner-margin">
-                <div><span>Minhas Contas</span></div>
-                <div>
-
+                <div class="my-accounts-title">
+                    <span>Minhas contas</span>
+                    <i class="fa-solid fa-piggy-bank"></i>
+                </div>
+                <div class="card-account-container">
+                    {% for account in accounts %}
+                        <div class="card-account primary-card">
+                            <div class="name-account">{{ account.name }}</div>
+                            <div class="account-balance value-positive">R$ {{ account.balance }}</div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
 
         <div class="transaction-history primary-card">
             <div class="inner-margin">
-                <span>HISTÓRICO</span>
+                <div class="transaction-history-title">
+                    <span>Histórico de transações</span>
+                    <i class="fa-solid fa-cash-register"></i>
+                </div>
+                <div class="card-transaction-container">
+                    {% for transaction in transactions %}
+                    	<div class="card-transaction primary-card">
+                        <div class="info-transaction">
+                            <div class="info-transaction-description">{{ transaction.description }}</div>
+                            <div class="info-transaction-account">{{ transaction.account }}</div>
+                        </div>
+                        <div class="transaction-value">
+                            {% if transaction.type == 'EXPENSE' %}
+                            	<span style="color: #E74C3CFF">R$ {{ transaction.value }}</span>
+                            {% elif transaction.type == 'INCOME' %}
+                                <span style="color: #67BE96FF">R$ {{ transaction.value }}</span>
+                            {% else %}
+                                <span style="color: #D2D2D2FF">R$ {{ transaction.value }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
             </div>
         </div>
     </div>
