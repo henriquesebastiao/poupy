@@ -21,12 +21,12 @@
             </div>
             <div class="overview-info">
                 <div class="overview-info-card monthly-income">
-                    <span class="overview-info-card-title">Renda Mensal</span>
+                    <span class="overview-info-card-title">Rendas do mês</span>
                     <span class="value value-positive">R$ 1500,00</span>
                 </div>
 
                 <div class="overview-info-card monthly-income">
-                    <span class="overview-info-card-title">Despesa Mensal</span>
+                    <span class="overview-info-card-title">Despesas do mês</span>
                     <span class="value value-negative">R$ 500,00</span>
                 </div>
 
@@ -80,11 +80,11 @@
         <div class="transaction-history primary-card">
             <div class="inner-margin">
                 <div class="transaction-history-title">
-                    <span>Histórico de transações</span>
+                    <span>Maiores transações do mês</span>
                     <i class="fa-solid fa-cash-register"></i>
                 </div>
                 <div class="card-transaction-container">
-                    {% for transaction in transactions %}
+                    {% for transaction in bigger_transactions_of_month %}
                     	<div class="card-transaction primary-card">
                         <div class="info-transaction">
                             <div class="info-transaction-description">{{ transaction.description }}</div>

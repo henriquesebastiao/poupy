@@ -1,0 +1,19 @@
+{% extends 'base/signup-and-login.html' %}
+{% block title %}
+    Login | Poupy
+{% endblock %}
+{% block inputs %}
+    <div class="email-input">
+        <span class="title-input">Email</span>
+        <label for="email"></label><input class="input" type="email" name="email" id="email"
+                                          placeholder="Digite seu email">
+    </div>
+    <div class="password-input">
+        <span class="title-input">Senha</span>
+        <label for="password"></label><input class="input" type="password" name="password" id="password"
+                                             placeholder="Digite sua senha">
+    </div>
+    <div>
+        <button class="btn btn-signup">Login</button>
+    </div>
+{% endblock %}

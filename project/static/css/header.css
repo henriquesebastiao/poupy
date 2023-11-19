@@ -6,13 +6,6 @@ header {
     background: var(--color-surface-700);
 }
 
-.logo-name {
-    color: var(--color-success-400);
-    font-family: 'Outfit', sans-serif;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
 .menu-center {
     display: flex;
     justify-content: center;

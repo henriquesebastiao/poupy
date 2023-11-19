@@ -1,0 +1,29 @@
+{% extends 'base/signup-and-login.html' %}
+{% block title %}
+    Signup | Poupy
+{% endblock %}
+{% block inputs %}
+    <div class="name-input">
+        <span class="title-input">Nome</span>
+        <label for="name"></label><input class="input" type="text" name="name" id="name"
+                                         placeholder="Digite seu nome">
+    </div>
+    <div class="last-name-input">
+        <span class="title-input">Sobrenome</span>
+        <label for="last-name"></label><input class="input" type="text" name="last-name" id="last-name"
+                                              placeholder="Digite seu sobrenome">
+    </div>
+    <div class="email-input">
+        <span class="title-input">Email</span>
+        <label for="email"></label><input class="input" type="email" name="email" id="email"
+                                          placeholder="Digite seu email">
+    </div>
+    <div class="password-input">
+        <span class="title-input">Senha</span>
+        <label for="password"></label><input class="input" type="password" name="password" id="password"
+                                             placeholder="Digite sua senha">
+    </div>
+    <div>
+        <button class="btn btn-signup">Cadastrar</button>
+    </div>
+{% endblock %}

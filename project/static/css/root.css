@@ -83,3 +83,17 @@
 body {
     background: var(--color-surface-500);
 }
+
+.logo-name {
+    color: var(--color-success-400);
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.primary-card {
+    background: var(--color-surface-800);
+    box-shadow: 0 0 5px var(--color-surface-900);
+    border: var(--color-surface-600) 1px solid;
+    border-radius: var(--theme-rounded-base);
+}
