@@ -5,14 +5,14 @@
 
 <p align="center"><strong>Manage your personal budget.</strong></p>
 
-<p align="center" style="text-decoration: none">
-  <a style="text-decoration: none" href="https://github.com/henriquesebastiao/poupy">
+<p align="center">
+  <a href="https://github.com/henriquesebastiao/poupy">
     <img src="https://img.shields.io/badge/Status-development-red" alt="Development status" />
   </a>
-  <a style="text-decoration: none" href="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml">
+  <a href="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml">
     <img src="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml/badge.svg" alt="CI status"/>
   </a>
-  <a style="text-decoration: none" href="https://github.com/henriquesebastiao/poupy/blob/main/LICENSE">
+  <a href="https://github.com/henriquesebastiao/poupy/blob/main/LICENSE">
     <img alt="LICENSE" src="https://img.shields.io/github/license/henriquesebastiao/poupy"/>
   </a>
 </p>
