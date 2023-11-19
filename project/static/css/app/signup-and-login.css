@@ -28,7 +28,7 @@ body {
     margin-top: .5rem;
 }
 
-.signup-container-inputs {
+.group-input-external {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
@@ -37,10 +37,18 @@ body {
     row-gap: 1rem;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .email-input,
 .password-input,
 .name-input,
-.last-name-input {
+.last-name-input,
+.group-input {
     display: flex;
     flex-direction: column;
     width: 150%;
@@ -51,7 +59,7 @@ body {
     font-weight: 400;
 }
 
-.input {
+.group-input input {
     margin-top: .5rem;
     padding: .5rem;
     border-radius: var(--theme-rounded-base);

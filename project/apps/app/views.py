@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render
 
+from .forms import LoginForm, RegisterForm
 from .models import Account, Transaction, User
 
 
@@ -38,8 +39,22 @@ def app(request):
 
 
 def signup(request):
-    return render(request, 'pages/app/signup.html')
+    form = RegisterForm()
+    return render(
+        request,
+        'pages/app/signup.html',
+        context={
+            'form': form,
+        },
+    )
 
 
 def login(request):
-    return render(request, 'pages/app/login.html')
+    form = LoginForm()
+    return render(
+        request,
+        'pages/app/login.html',
+        context={
+            'form': form,
+        },
+    )

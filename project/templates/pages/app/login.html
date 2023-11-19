@@ -6,17 +6,17 @@
 	Acesse a plataforma
 {% endblock %}
 {% block inputs %}
-    <div class="email-input">
-        <span class="title-input">Email</span>
-        <label for="email"></label><input class="input" type="email" name="email" id="email"
-                                          placeholder="Digite seu email">
+    <form action="" method="post">
+    <div class="group-input-external">
+        {% for field in form %}
+            <div class="group-input">
+                <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
     </div>
-    <div class="password-input">
-        <span class="title-input">Senha</span>
-        <label for="password"></label><input class="input" type="password" name="password" id="password"
-                                             placeholder="Digite sua senha">
-    </div>
-    <div>
-        <button class="btn btn-signup">Login</button>
-    </div>
+        <div>
+            <button class="btn btn-signup">Login</button>
+        </div>
+    </form>
 {% endblock %}
