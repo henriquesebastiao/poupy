@@ -1,0 +1,77 @@
+.inner-margin {
+    margin: 2rem;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-signup {
+    width: 30%;
+}
+
+.inner-card-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.signup-title {
+    margin-top: .5rem;
+}
+
+.signup-container-inputs {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1rem;
+}
+
+.email-input,
+.password-input,
+.name-input,
+.last-name-input {
+    display: flex;
+    flex-direction: column;
+    width: 150%;
+}
+
+.title-input {
+    color: var(--color-surface-200);
+    font-weight: 400;
+}
+
+.input {
+    margin-top: .5rem;
+    padding: .5rem;
+    border-radius: var(--theme-rounded-base);
+    background: var(--color-surface-500);
+    border: var(--color-surface-600) 1px solid;
+    color: white;
+}
+
+.btn {
+    margin-top: 1rem;
+    padding: .5rem;
+    width: 100%;
+    border-radius: var(--theme-rounded-base);
+    background: var(--color-success-700);
+    border: var(--color-success-500) 1px solid;
+    color: white;
+    font-weight: 500;
+    transition: background .5s ease;
+}
+
+.btn-signup:hover {
+    background: var(--color-success-500);
+}
