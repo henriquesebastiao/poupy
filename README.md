@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="utils/img/bitmap.png" alt="Pods" width="150"/>
+    <img src="utils/img/bitmap.png" alt="Poupy" width="150"/>
     <br>
 </h1>
 
