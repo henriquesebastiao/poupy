@@ -5,7 +5,7 @@
 
 <p align="center"><strong>Manage your personal budget.</strong></p>
 
-<p align="center">
+<p align="center" style="text-decoration: none">
   <a href="https://github.com/henriquesebastiao/poupy">
     <img src="https://img.shields.io/badge/Status-development-red" alt="Development status" />
   </a>
