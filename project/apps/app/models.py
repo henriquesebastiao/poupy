@@ -46,3 +46,6 @@ class Transaction(models.Model):
         default=TransactionType.EXPENSE,
         null=False,
     )
+
+    def __str__(self):
+        return self.description

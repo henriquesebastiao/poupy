@@ -1,18 +1,12 @@
+{% extends 'base/app/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8"/>
-    <title>Poupy</title>
-    {% include 'partials/head.html' %}
-    <link rel="stylesheet" href="{% static 'css/app/header.css' %}" type="text/css"/>
+{% block title %}
+    App | Poupy
+{% endblock %}
+{% block extend_css %}
     <link rel="stylesheet" href="{% static 'css/app/main.css' %}" type="text/css"/>
-</head>
-
-<body>
-{% include 'partials/app/header.html' %}
-<main class="main-content">
+{% endblock %}
+{% block main %}
     <div class="horizontal-section primary-card overview-card">
         <div class="overview-info-container">
             <div class="overview-welcome">
@@ -22,12 +16,12 @@
             <div class="overview-info">
                 <div class="overview-info-card monthly-income">
                     <span class="overview-info-card-title">Rendas do mês</span>
-                    <span class="value value-positive">R$ 1500,00</span>
+                    <span class="value value-positive">R$ {{ monthly_incomes }}</span>
                 </div>
 
                 <div class="overview-info-card monthly-income">
                     <span class="overview-info-card-title">Despesas do mês</span>
-                    <span class="value value-negative">R$ 500,00</span>
+                    <span class="value value-negative">R$ {{ monthly_expenses }}</span>
                 </div>
 
                 <!-- Saldo Total -->
@@ -76,7 +70,6 @@
                 </div>
             </div>
         </div>
-
         <div class="transaction-history primary-card">
             <div class="inner-margin">
                 <div class="transaction-history-title">
@@ -85,28 +78,24 @@
                 </div>
                 <div class="card-transaction-container">
                     {% for transaction in bigger_transactions_of_month %}
-                    	<div class="card-transaction primary-card">
-                        <div class="info-transaction">
-                            <div class="info-transaction-description">{{ transaction.description }}</div>
-                            <div class="info-transaction-account">{{ transaction.account }}</div>
+                        <div class="card-transaction primary-card">
+                            <div class="info-transaction">
+                                <div class="info-transaction-description">{{ transaction.description }}</div>
+                                <div class="info-transaction-account">{{ transaction.account }}</div>
+                            </div>
+                            <div class="transaction-value">
+                                {% if transaction.type == 'EXPENSE' %}
+                                    <span style="color: #E74C3CFF">R$ {{ transaction.value }}</span>
+                                {% elif transaction.type == 'INCOME' %}
+                                    <span style="color: #67BE96FF">R$ {{ transaction.value }}</span>
+                                {% else %}
+                                    <span style="color: #D2D2D2FF">R$ {{ transaction.value }}</span>
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="transaction-value">
-                            {% if transaction.type == 'EXPENSE' %}
-                            	<span style="color: #E74C3CFF">R$ {{ transaction.value }}</span>
-                            {% elif transaction.type == 'INCOME' %}
-                                <span style="color: #67BE96FF">R$ {{ transaction.value }}</span>
-                            {% else %}
-                                <span style="color: #D2D2D2FF">R$ {{ transaction.value }}</span>
-                            {% endif %}
-                        </div>
-                    </div>
                     {% endfor %}
                 </div>
-
             </div>
         </div>
     </div>
-</main>
-</body>
-
-</html>
+{% endblock %}

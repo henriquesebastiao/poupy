@@ -1,0 +1,50 @@
+{% extends 'base/app/base.html' %}
+{% load static %}
+{% block title %}
+    Registros | Poupy
+{% endblock %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static 'css/app/transactions.css' %}" type="text/css">
+{% endblock %}
+{% block main %}
+    <div class="primary-card transaction-container">
+        <div class="header">
+            <div class="transactions-master-title">Registros</div>
+            <!-- <div class="month-transactions">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Novembro 2023</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </div> -->
+        </div>
+        {% for transaction in all_transactions %}
+            <div class="secondary-card transaction-card">
+                <div class="transaction-card-inner">
+                <div class="icon-container">
+                    {% if transaction.type == 'EXPENSE' %}
+                    	<i style="color: #E74C3CFF" class="fa-solid fa-circle-minus"></i>
+                    {% elif transaction.type == 'INCOME' %}
+                    	<i style="color: #67BE96FF" class="fa-solid fa-circle-plus"></i>
+                    {% else %}
+                        <i style="color: #D2D2D2FF" class="fa-solid fa-right-left"></i>
+                    {% endif %}
+                    <div class="description-container">
+                        <span class="description">{{ transaction.description }}</span>
+                        <span class="category">Categoria</span>
+                    </div>
+                </div>
+                    <div class="value-container">
+                        <span class="account">{{ transaction.account }}</span>
+                        {% if transaction.type == 'EXPENSE' %}
+                            <span style="color: #E74C3CFF" class="value">R$ {{ transaction.value }}</span>
+                        {% elif transaction.type == 'INCOME' %}
+                            <span style="color: #67BE96FF" class="value">R$ {{ transaction.value }}</span>
+                        {% else %}
+                            <span style="color: #D2D2D2FF" class="value">R$ {{ transaction.value }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

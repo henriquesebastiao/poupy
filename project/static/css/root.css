@@ -97,3 +97,9 @@ body {
     border: var(--color-surface-600) 1px solid;
     border-radius: var(--theme-rounded-base);
 }
+
+.secondary-card {
+    background: var(--color-surface-500);
+    box-shadow: 0 0 5px var(--color-surface-900);
+    border-radius: var(--theme-rounded-base);
+}

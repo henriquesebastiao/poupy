@@ -1,0 +1,91 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transaction-container {
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.header {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.transactions-master-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.month-transactions {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+}
+
+.transaction-card {
+    width: 85%;
+}
+
+.transaction-card-inner {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.icon-container i {
+    font-size: 1.5rem;
+}
+
+.description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.description {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.category {
+    color: var(--color-surface-200);
+}
+
+.value-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+}
+
+.account {
+    color: var(--color-surface-300);
+}
+
+.value {
+    font-weight: 700;
+}
