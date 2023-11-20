@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import User
+from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.ModelForm):
@@ -9,6 +9,7 @@ class RegisterForm(forms.ModelForm):
         fields = [
             'first_name',
             'last_name',
+            'username',
             'email',
             'password',
         ]

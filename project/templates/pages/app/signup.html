@@ -7,14 +7,15 @@
 {% endblock %}
 {% block inputs %}
     <form action="" method="post">
-    <div class="group-input-external">
-        {% for field in form %}
-            <div class="group-input">
-                <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-            </div>
-        {% endfor %}
-    </div>
+        {% csrf_token %}
+        <div class="group-input-external">
+            {% for field in form %}
+                <div class="group-input">
+                    <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </div>
         <div>
             <button class="btn btn-signup">Cadastrar</button>
         </div>

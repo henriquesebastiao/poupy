@@ -1,17 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-
-class User(models.Model):
-    first_name = models.CharField(max_length=55, null=False)
-    last_name = models.CharField(max_length=55)
-    email = models.EmailField(unique=True, null=False)
-    password = models.CharField(max_length=255, null=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.first_name
+from django.contrib.auth.models import User
 
 
 class Account(models.Model):
