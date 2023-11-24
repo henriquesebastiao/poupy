@@ -1,6 +1,7 @@
 from datetime import datetime
 
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import redirect, render
 
 from .forms import LoginForm, RegisterForm
 from .models import Account, Transaction, User
@@ -64,7 +65,8 @@ def app(request):
 
 
 def signup(request):
-    form = RegisterForm()
+    signup_form_data = request.session.get('signup_form_data', None)
+    form = RegisterForm(signup_form_data)
     return render(
         request,
         'pages/app/signup.html',
@@ -72,6 +74,23 @@ def signup(request):
             'form': form,
         },
     )
+
+
+def user_create(request):
+    if not request.POST:
+        raise Http404()
+    post = request.POST
+    request.session['signup_form_data'] = post
+    form = RegisterForm(post)
+
+    if form.is_valid():
+        user = form.save(commit=False)
+        user.set_password(user.password)  # Salva a senha criptografada no db
+        user.save()
+
+        del request.session['signup_form_data']
+
+    return redirect('signup')
 
 
 def login(request):

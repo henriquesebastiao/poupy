@@ -14,7 +14,7 @@ body {
 }
 
 .card-signup {
-    width: 30%;
+    width: 50%;
 }
 
 .inner-card-signup {
@@ -31,8 +31,8 @@ body {
 .group-input-external {
     margin-top: 2rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     align-items: center;
     row-gap: 1rem;
 }
@@ -51,7 +51,7 @@ form {
 .group-input {
     display: flex;
     flex-direction: column;
-    width: 150%;
+    width: 45%;
 }
 
 .title-input {
@@ -69,7 +69,7 @@ form {
 }
 
 .btn {
-    margin-top: 1rem;
+    margin-top: 2rem;
     padding: .5rem;
     width: 100%;
     border-radius: var(--theme-rounded-base);

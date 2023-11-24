@@ -6,7 +6,7 @@
     Cadastre-se
 {% endblock %}
 {% block inputs %}
-    <form action="" method="post">
+    <form action="{% url 'user_create' %}" method="post">
         {% csrf_token %}
         <div class="group-input-external">
             {% for field in form %}
