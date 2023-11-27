@@ -103,3 +103,17 @@ body {
     box-shadow: 0 0 5px var(--color-surface-900);
     border-radius: var(--theme-rounded-base);
 }
+
+/* Messages */
+.message {
+    padding: .5rem;
+    border-radius: var(--theme-rounded-base);
+    border: var(--theme-border-base) solid var(--color-surface-300);
+    color: var(--color-surface-300);
+    font-size: .9rem;
+}
+
+.message-error {
+    border: var(--theme-border-base) solid var(--color-error-500);
+    color: var(--color-error-500);
+}

@@ -8,7 +8,8 @@ class RegisterForm(forms.ModelForm):
         widget=forms.PasswordInput(
             attrs={'placeholder': 'Digite sua senha novamente'}
         ),
-        error_messages={'required': 'Voê precisa repetir sua senha'},
+        error_messages={'required': 'Você precisa repetir sua senha'},
+        label='Repita sua senha',
     )
 
     class Meta:
@@ -55,10 +56,14 @@ class RegisterForm(forms.ModelForm):
         }
 
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = [
-            'email',
-            'password',
-        ]
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label='Nome de usuário',
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Insira seu nome de usuário'}
+        ),
+    )
+    password = forms.CharField(
+        label='Senha',
+        widget=forms.PasswordInput(attrs={'placeholder': 'Insira sua senha'}),
+    )

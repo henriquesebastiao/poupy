@@ -6,12 +6,20 @@
     <title>{% block title %}{% endblock %}</title>
     {% include 'partials/head.html' %}
     <link rel="stylesheet" href="{% static 'css/app/signup-and-login.css' %}" type="text/css">
+    {% block css_extends %}{% endblock %}
 </head>
 <body>
 <div class="primary-card card-signup">
     <div class="inner-margin inner-card-signup">
         <div class="logo-name">Poupy</div>
         <div class="signup-title">{% block action-title %}{% endblock %}</div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="signup-container-inputs">
             {% block inputs %}{% endblock %}
         </div>

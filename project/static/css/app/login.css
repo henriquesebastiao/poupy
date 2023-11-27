@@ -1,0 +1,28 @@
+.card-signup {
+    width: 40%;
+}
+
+.signup-container-inputs {
+    width: 100%;
+}
+
+.group-input-external {
+    flex-direction: column;
+    width: 100%;
+}
+
+.group-input {
+    width: 60%;
+}
+
+.call-action {
+    margin-top: 2rem;
+    font-size: .8rem;
+    color: var(--color-surface-300);
+}
+
+.call-action a {
+    text-decoration: underline;
+    color: var(--color-success-500);
+}
+

@@ -1,14 +1,21 @@
 from datetime import datetime
 
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.http import Http404
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
 from .forms import LoginForm, RegisterForm
 from .models import Account, Transaction, User
 
 
 def app(request):
-    user = User.objects.get(email='contato@henriquesebastiao.com')
+    # Redireciona para a página de login caso o usuário tente acessar o app, mas não esteja logado
+    if request.user.id is None:
+        return redirect('login')
+
+    user = User.objects.get(email=request.user.email)
     accounts = Account.objects.filter(user=user)
     total_balance = sum([account.balance for account in accounts])
 
@@ -87,21 +94,47 @@ def user_create(request):
         user = form.save(commit=False)
         user.set_password(user.password)  # Salva a senha criptografada no db
         user.save()
+        messages.success(request, 'Usuário criado com sucesso.')
 
         del request.session['signup_form_data']
 
-    return redirect('signup')
+    # Após o usuário ser criado ele já redirecionado para fazer login
+    return redirect('login')
 
 
-def login(request):
+def auth(request):
     form = LoginForm()
     return render(
         request,
         'pages/app/login.html',
-        context={
-            'form': form,
-        },
+        context={'form': form, 'form_action': reverse('login_create')},
     )
+
+
+def auth_create(request):
+    if not request.POST:
+        raise Http404()
+
+    form = LoginForm(request.POST)
+    app_url = reverse('app')
+
+    if form.is_valid():
+        authenticate_user = authenticate(
+            request,
+            username=form.cleaned_data.get('username', ''),
+            password=form.cleaned_data.get('password', ''),
+        )
+
+        if authenticate_user is not None:
+            messages.success(request, 'Usuário logado com sucesso.')
+            login(request, authenticate_user)
+        else:
+            messages.error(request, 'Credenciais inválidas.')
+    else:
+        messages.error(request, 'Erro na validação dos dados.')
+
+    # Após o usuário se autenticar, redireciona ele para o app
+    return redirect(app_url)
 
 
 def transactions(request):

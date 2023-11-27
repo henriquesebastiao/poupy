@@ -83,3 +83,8 @@ form {
 .btn-signup:hover {
     background: var(--color-success-500);
 }
+
+/* Messages */
+.message {
+    margin-top: 2rem;
+}

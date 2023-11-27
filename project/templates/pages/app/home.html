@@ -10,7 +10,7 @@
     <div class="horizontal-section primary-card overview-card">
         <div class="overview-info-container">
             <div class="overview-welcome">
-                <h2>Olá, {{ user_first_name }}! 😊</h2>
+                <h2>Olá, {{ request.user.first_name }}! 😊</h2>
                 <button class="vision-button" type="submit"><i class="fa-regular fa-eye"></i></button>
             </div>
             <div class="overview-info">

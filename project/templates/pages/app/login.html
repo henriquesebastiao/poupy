@@ -1,20 +1,26 @@
 {% extends 'base/app/signup-and-login.html' %}
+{% load static %}
 {% block title %}
     Login | Poupy
 {% endblock %}
+{% block css_extends %}
+    <link rel="stylesheet" href="{% static 'css/app/login.css' %}" type="text/css">
+{% endblock %}
 {% block action-title %}
-	Acesse a plataforma
+    Acesse a plataforma
 {% endblock %}
 {% block inputs %}
-    <form action="" method="post">
-    <div class="group-input-external">
-        {% for field in form %}
-            <div class="group-input">
-                <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {{ field }}
-            </div>
-        {% endfor %}
-    </div>
+    <form action="{% url 'login_create' %}" method="post">
+        {% csrf_token %}
+        <div class="group-input-external">
+            {% for field in form %}
+                <div class="group-input">
+                    <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="call-action">Não tem uma conta? <a href="{% url 'signup' %}">Cadastre-se</a></div>
         <div>
             <button class="btn btn-signup">Login</button>
         </div>
