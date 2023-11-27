@@ -117,3 +117,8 @@ body {
     border: var(--theme-border-base) solid var(--color-error-500);
     color: var(--color-error-500);
 }
+
+.message-success {
+    border: var(--theme-border-base) solid var(--color-success-500);
+    color: var(--color-success-500);
+}

@@ -88,3 +88,14 @@ form {
 .message {
     margin-top: 2rem;
 }
+
+.call-action {
+    margin-top: 2rem;
+    font-size: .8rem;
+    color: var(--color-surface-300);
+}
+
+.call-action a {
+    text-decoration: underline;
+    color: var(--color-success-500);
+}

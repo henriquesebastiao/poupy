@@ -1,7 +1,8 @@
 from datetime import datetime
 
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -10,11 +11,8 @@ from .forms import LoginForm, RegisterForm
 from .models import Account, Transaction, User
 
 
+@login_required(login_url='login')
 def app(request):
-    # Redireciona para a página de login caso o usuário tente acessar o app, mas não esteja logado
-    if request.user.id is None:
-        return redirect('login')
-
     user = User.objects.get(email=request.user.email)
     accounts = Account.objects.filter(user=user)
     total_balance = sum([account.balance for account in accounts])
@@ -102,7 +100,7 @@ def user_create(request):
     return redirect('login')
 
 
-def auth(request):
+def login_view(request):
     form = LoginForm()
     return render(
         request,
@@ -111,7 +109,7 @@ def auth(request):
     )
 
 
-def auth_create(request):
+def login_create(request):
     if not request.POST:
         raise Http404()
 
@@ -126,7 +124,6 @@ def auth_create(request):
         )
 
         if authenticate_user is not None:
-            messages.success(request, 'Usuário logado com sucesso.')
             login(request, authenticate_user)
         else:
             messages.error(request, 'Credenciais inválidas.')
@@ -137,6 +134,17 @@ def auth_create(request):
     return redirect(app_url)
 
 
+@login_required(login_url='login', redirect_field_name='next')
+def logout_view(request):
+    if not request.POST:
+        raise Http404()
+
+    logout(request)
+    messages.success(request, 'Logout realizado com sucesso.')
+    return redirect(reverse('login'))
+
+
+@login_required(login_url='login')
 def transactions(request):
     user = User.objects.get(email='contato@henriquesebastiao.com')
     all_transactions = Transaction.objects.filter(user=user).order_by('-id')

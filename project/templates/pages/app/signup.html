@@ -1,6 +1,6 @@
 {% extends 'base/app/signup-and-login.html' %}
 {% block title %}
-    Signup | Poupy
+    📝 Signup | Poupy
 {% endblock %}
 {% block action-title %}
     Cadastre-se
@@ -16,6 +16,7 @@
                 </div>
             {% endfor %}
         </div>
+        <div class="call-action">Já possui uma conta? <a href="{% url 'login' %}">Faça login</a></div>
         <div>
             <button class="btn btn-signup">Cadastrar</button>
         </div>

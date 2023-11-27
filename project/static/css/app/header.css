@@ -12,3 +12,12 @@
 .menu-right-icons:hover {
     color: var(--color-success-400);
 }
+
+.exit-button {
+    margin-left: 1rem;
+}
+
+.exit-button button {
+    background: none;
+    font-size: 1rem;
+}

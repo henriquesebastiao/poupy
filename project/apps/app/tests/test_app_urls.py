@@ -25,7 +25,7 @@ class AppURLsTest(TestCase):
         self.assertEqual(reverse('login'), '/app/login/')
 
     def test_if_url_app_login_render_correct_view(self):
-        self.assertEqual(resolve('/app/login/').func.__name__, 'login')
+        self.assertEqual(resolve('/app/login/').func.__name__, 'login_view')
 
     def test_if_url_app_login_return_status_code_200(self):
         self.assertEqual(self.client.get(reverse('login')).status_code, 200)

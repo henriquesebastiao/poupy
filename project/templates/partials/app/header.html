@@ -17,5 +17,11 @@
         <a href="#">
             <i class="menu-right-icons fa-solid fa-user"></i>
         </a>
+        <form action="{% url 'logout' %}" method="post" class="exit-button">
+            {% csrf_token %}
+            <button type="submit">
+                <i class="menu-right-icons fa-solid fa-arrow-right-from-bracket"></i>
+            </button>
+        </form>
     </div>
 </header>

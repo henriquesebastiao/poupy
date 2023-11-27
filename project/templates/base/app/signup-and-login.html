@@ -11,7 +11,9 @@
 <body>
 <div class="primary-card card-signup">
     <div class="inner-margin inner-card-signup">
-        <div class="logo-name">Poupy</div>
+        <a href="{% url 'home' %}">
+            <div class="logo-name">Poupy</div>
+        </a>
         <div class="signup-title">{% block action-title %}{% endblock %}</div>
         {% if messages %}
             {% for message in messages %}
