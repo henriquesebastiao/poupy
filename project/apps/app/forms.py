@@ -120,7 +120,7 @@ class TransactionsEditForm(forms.ModelForm):
         }
 
 
-class NewExpenseForm(forms.ModelForm):
+class NewTransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = [
@@ -137,3 +137,27 @@ class NewExpenseForm(forms.ModelForm):
                 attrs={'placeholder': 'Insert the value'}
             ),
         }
+
+
+class TransferForm(forms.Form):
+    description = forms.CharField(
+        label='Descrição',
+        widget=forms.TextInput(),
+    )
+
+    account_origin = forms.ModelChoiceField(
+        queryset=Account.objects.all(),
+        label='Conta de origem',
+        widget=forms.Select(),
+    )
+
+    account_destination = forms.ModelChoiceField(
+        queryset=Account.objects.all(),
+        label='Conta de destino',
+        widget=forms.Select(),
+    )
+
+    value = forms.DecimalField(
+        label='Valor',
+        widget=forms.NumberInput(),
+    )

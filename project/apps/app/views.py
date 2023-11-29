@@ -10,11 +10,13 @@ from django.urls import reverse
 from .forms import (
     AccountEditForm,
     LoginForm,
-    NewExpenseForm,
+    NewTransactionForm,
     RegisterForm,
     TransactionsEditForm,
+    TransferForm,
 )
 from .models import Account, Transaction, User
+from .utils import add_transaction
 
 
 @login_required(login_url='login')
@@ -122,7 +124,6 @@ def login_create(request):
         raise Http404()
 
     form = LoginForm(request.POST)
-    app_url = reverse('app')
 
     if form.is_valid():
         authenticate_user = authenticate(
@@ -139,7 +140,7 @@ def login_create(request):
         messages.error(request, 'Erro na validação dos dados.')
 
     # Após o usuário se autenticar, redireciona ele para o app
-    return redirect(app_url)
+    return redirect(reverse('app'))
 
 
 @login_required(login_url='login')
@@ -219,7 +220,7 @@ def account_edit(request, account_id):
 
 @login_required(login_url='login')
 def new_expanse(request):
-    form = NewExpenseForm()
+    form = NewTransactionForm()
     return render(
         request,
         'pages/app/new_expanse.html',
@@ -231,21 +232,85 @@ def new_expanse(request):
 
 @login_required(login_url='login')
 def new_expanse_create(request):
+    add_transaction(request, NewTransactionForm(request.POST), 'expanse')
+    return redirect('app')
+
+
+@login_required(login_url='login')
+def new_income(request):
+    form = NewTransactionForm()
+    return render(
+        request,
+        'pages/app/new_income.html',
+        context={
+            'form': form,
+        },
+    )
+
+
+@login_required(login_url='login')
+def new_income_create(request):
+    add_transaction(request, NewTransactionForm(request.POST), 'income')
+    return redirect('app')
+
+
+@login_required(login_url='login')
+def new_transfer(request):
+    form = TransferForm()
+    return render(
+        request,
+        'pages/app/new_transfer.html',
+        context={
+            'form': form,
+        },
+    )
+
+
+@login_required(login_url='login')
+def new_transfer_create(request):
     if not request.POST:
         raise Http404()
-    post = request.POST
-    form = NewExpenseForm(post)
+
+    form = TransferForm(request.POST)
 
     if form.is_valid():
-        # Add new expanse
-        transaction = form.save(commit=False)
-        transaction.transaction_date = datetime.now()
-        transaction.user_id = request.user.id
-        transaction.save()
+        data = form.cleaned_data
+        account_origin = Account.objects.get(name=data['account_origin'])
+        account_destination = Account.objects.get(
+            name=data['account_destination']
+        )
 
-        # Update value in account
-        account = Account.objects.get(name=transaction.account.name)
-        account.balance -= transaction.value
-        account.save()
+        if account_origin.balance >= data['value']:
+            transaction_origin = Transaction(
+                description=data['description'],
+                user=request.user,
+                account=account_origin,
+                value=data['value'],
+                transaction_date=datetime.now(),
+                type=Transaction.TransactionType.TRANSFER,
+            )
+            transaction_destination = Transaction(
+                description=data['description'],
+                user=request.user,
+                account=account_destination,
+                value=data['value'],
+                transaction_date=datetime.now(),
+                type=Transaction.TransactionType.TRANSFER,
+            )
 
-    return redirect('app')
+            transaction_origin.save()
+            transaction_destination.save()
+
+            account_origin.balance -= data['value']
+            account_destination.balance += data['value']
+
+            account_origin.save()
+            account_destination.save()
+
+            return redirect('app')
+
+        else:
+            messages.error(
+                request, 'Saldo insuficiente para realizar a transferência.'
+            )
+            return redirect('new_transfer')

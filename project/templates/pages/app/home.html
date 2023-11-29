@@ -40,14 +40,14 @@
                     </div>
                 </a>
             {% endif %}
-            <a href="#">
+            <a href="{% url 'new_income' %}">
                 <div class="overview-actions-card">
                     <i class="actions-icon value-positive fa-solid fa-circle-plus"></i>
                     <span class="value-positive">Receita</span>
                 </div>
             </a>
             {% if total_balance > 0 and number_accounts > 1 %}
-                <a href="#">
+                <a href="{% url 'new_transfer' %}">
                     <div class="overview-actions-card">
                         <i class="actions-icon value-general fa-solid fa-money-bill-transfer"></i>
                         <span class="value-general">Transferência</span>

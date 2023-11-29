@@ -1,0 +1,13 @@
+{% extends 'base/app/base_form.html' %}
+{% block title %}
+    📝 New transfer | Poupy
+{% endblock %}
+{% block tag_form %}
+    {% url 'new_transfer_create' %}
+{% endblock %}
+{% block action_title %}
+	New transfer
+{% endblock %}
+{% block button_text %}
+	Save
+{% endblock %}

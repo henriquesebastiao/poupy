@@ -27,4 +27,14 @@ urlpatterns = [
         views.new_expanse_create,
         name='new_expanse_create',
     ),
+    path('new-income/', views.new_income, name='new_income'),
+    path(
+        'new-income/create/', views.new_income_create, name='new_income_create'
+    ),
+    path('new-transfer/', views.new_transfer, name='new_transfer'),
+    path(
+        'new-transfer/create/',
+        views.new_transfer_create,
+        name='new_transfer_create',
+    ),
 ]

@@ -1,0 +1,13 @@
+{% extends 'base/app/base_form.html' %}
+{% block title %}
+    📝 Add income | Poupy
+{% endblock %}
+{% block tag_form %}
+    {% url 'new_income_create' %}
+{% endblock %}
+{% block action_title %}
+	Add income
+{% endblock %}
+{% block button_text %}
+	Save
+{% endblock %}
