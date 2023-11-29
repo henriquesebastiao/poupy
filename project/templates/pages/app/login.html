@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/app/login.css' %}" type="text/css">
 {% endblock %}
 {% block action-title %}
-    Acesse a plataforma
+    Access the platform
 {% endblock %}
 {% block inputs %}
     <form action="{% url 'login_create' %}" method="post">
@@ -20,7 +20,7 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="call-action">Não tem uma conta? <a href="{% url 'signup' %}">Cadastre-se</a></div>
+        <div class="call-action">Don't have an account? <a href="{% url 'signup' %}">Register</a></div>
         <div>
             <button class="btn btn-signup">Login</button>
         </div>

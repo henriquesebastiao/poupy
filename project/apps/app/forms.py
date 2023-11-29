@@ -8,10 +8,10 @@ class RegisterForm(forms.ModelForm):
     repeat_password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
-            attrs={'placeholder': 'Digite sua senha novamente'}
+            attrs={'placeholder': 'Enter your password again'}
         ),
-        error_messages={'required': 'Você precisa repetir sua senha'},
-        label='Repita sua senha',
+        error_messages={'required': 'You need to repeat your password'},
+        label='Repeat your password',
     )
 
     class Meta:
@@ -25,49 +25,47 @@ class RegisterForm(forms.ModelForm):
         ]
 
         labels = {
-            'first_name': 'Nome',
-            'last_name': 'Sobrenome',
-            'username': 'Nome de usuário',
+            'first_name': 'First name',
+            'last_name': 'Last name',
+            'username': 'Username',
             'email': 'Email',
         }
 
         # Ver isso melhor
         error_messages = {
-            'email': {'required': 'Você precisa inserir um endereço de email'},
-            'username': {
-                'required': 'Você precisa inserir um nome de usuário'
-            },
+            'email': {'required': 'You need to enter an email address'},
+            'username': {'required': 'You need to enter a username'},
         }
 
         widgets = {
             'first_name': forms.TextInput(
-                attrs={'placeholder': 'Insira seu nome'}
+                attrs={'placeholder': 'Enter your first name'}
             ),
             'last_name': forms.TextInput(
-                attrs={'placeholder': 'Insira seu sobrenome'}
+                attrs={'placeholder': 'Enter your last name'}
             ),
             'username': forms.TextInput(
-                attrs={'placeholder': 'Insira um nome de usuário'}
+                attrs={'placeholder': 'Enter a username'}
             ),
             'email': forms.EmailInput(
-                attrs={'placeholder': 'Insira seu melhor email'}
+                attrs={'placeholder': 'Enter your best email'}
             ),
             'password': forms.PasswordInput(
-                attrs={'placeholder': 'Insira uma senha segura'}
+                attrs={'placeholder': 'Enter a secure password'}
             ),
         }
 
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        label='Nome de usuário',
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Insira seu nome de usuário'}
-        ),
+        label='Username',
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
     )
     password = forms.CharField(
-        label='Senha',
-        widget=forms.PasswordInput(attrs={'placeholder': 'Insira sua senha'}),
+        label='Password',
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Enter your password'}
+        ),
     )
 
 
@@ -80,16 +78,16 @@ class AccountEditForm(forms.ModelForm):
         ]
 
         labels = {
-            'name': 'Nome da conta',
-            'balance': 'Saldo',
+            'name': 'Account name',
+            'balance': 'Balance',
         }
 
         widgets = {
             'name': forms.TextInput(
-                attrs={'placeholder': 'Insira o nome da conta'}
+                attrs={'placeholder': 'Enter account name'}
             ),
             'balance': forms.NumberInput(
-                attrs={'placeholder': 'Insira o saldo da conta'}
+                attrs={'placeholder': 'Enter account balance'}
             ),
         }
 
@@ -113,11 +111,7 @@ class TransactionsEditForm(forms.ModelForm):
             'type': 'Type',
         }
 
-        widgets = {
-            'description': forms.TextInput(
-                attrs={'placeholder': 'Insert the description of transaction'}
-            )
-        }
+        widgets = {'description': forms.TextInput(attrs={'placeholder': ''})}
 
 
 class NewTransactionForm(forms.ModelForm):
@@ -138,26 +132,44 @@ class NewTransactionForm(forms.ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super(NewTransactionForm, self).__init__(*args, **kwargs)
+        if user:
+            self.fields['account'].queryset = Account.objects.filter(user=user)
+
 
 class TransferForm(forms.Form):
     description = forms.CharField(
-        label='Descrição',
-        widget=forms.TextInput(),
+        label='Description',
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Insert the description of transaction'}
+        ),
     )
 
     account_origin = forms.ModelChoiceField(
         queryset=Account.objects.all(),
-        label='Conta de origem',
+        label='Source account',
         widget=forms.Select(),
     )
 
     account_destination = forms.ModelChoiceField(
         queryset=Account.objects.all(),
-        label='Conta de destino',
+        label='Target account',
         widget=forms.Select(),
     )
 
     value = forms.DecimalField(
-        label='Valor',
-        widget=forms.NumberInput(),
+        label='Value',
+        widget=forms.NumberInput(
+            attrs={'placeholder': 'Insert the value of transaction'}
+        ),
+    )
+
+
+class DeleteAccountForm(forms.Form):
+    account = forms.ModelChoiceField(
+        queryset=Account.objects.all(),
+        label='Account',
+        widget=forms.Select(),
     )

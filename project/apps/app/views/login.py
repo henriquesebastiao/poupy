@@ -33,9 +33,9 @@ def login_create(request):
         if authenticate_user is not None:
             login(request, authenticate_user)
         else:
-            messages.error(request, 'Credenciais inválidas.')
+            messages.error(request, 'Invalid credentials.')
     else:
-        messages.error(request, 'Erro na validação dos dados.')
+        messages.error(request, 'Error in data validation.')
 
     # Após o usuário se autenticar, redireciona ele para o app
     return redirect(reverse('app'))
@@ -47,5 +47,5 @@ def logout_view(request):
         raise Http404()
 
     logout(request)
-    messages.success(request, 'Logout realizado com sucesso.')
+    messages.success(request, 'Logout completed successfully.')
     return redirect(reverse('login'))

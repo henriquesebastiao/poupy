@@ -1,6 +1,13 @@
 from django.urls import path
 
-from ..app.views.accounts import account_edit, accounts_view
+from ..app.views.accounts import (
+    account_edit,
+    accounts_view,
+    delete_account,
+    delete_account_confirm,
+    new_account,
+    new_account_create,
+)
 from ..app.views.app import app
 from ..app.views.expanse import new_expanse, new_expanse_create
 from ..app.views.income import new_income, new_income_create
@@ -23,10 +30,22 @@ urlpatterns = [
         name='transaction_edit',
     ),
     path('accounts/', accounts_view, name='accounts'),
+    path('accounts/new-account/', new_account, name='new_account'),
+    path(
+        'accounts/new-account/create/',
+        new_account_create,
+        name='new_account_create',
+    ),
     path(
         'account/<int:account_id>/edit/',
         account_edit,
         name='account_edit',
+    ),
+    path('accounts/delete-account/', delete_account, name='delete_account'),
+    path(
+        'accounts/delete-account/confirm/',
+        delete_account_confirm,
+        name='delete_account_confirm',
     ),
     path('new-expanse/', new_expanse, name='new_expanse'),
     path(

@@ -11,9 +11,30 @@
         <!-- Card que lista as contas do usuário contas -->
         <div class="inner-margin">
             <div class="my-accounts-title">
-                <span>Minhas contas</span>
+                <span>My accounts</span>
                 <i class="fa-solid fa-piggy-bank"></i>
             </div>
+            <div class="manage-accounts-container">
+                <a href="{% url 'new_account' %}">
+                    <div class="overview-actions-card">
+                        <i class="actions-icon value-positive fa-solid fa-circle-plus"></i>
+                        <span class="value-positive">Add account</span>
+                    </div>
+                </a>
+                <a href="{% url 'delete_account' %}">
+                    <div class="overview-actions-card">
+                        <i class="actions-icon value-negative fa-solid fa-circle-minus"></i>
+                        <span class="value-negative">Delete account</span>
+                    </div>
+                </a>
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="card-account-container">
                 {% for account in accounts %}
                     <a class="link-account" href="{% url 'account_edit' account.id %}">

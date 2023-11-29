@@ -28,7 +28,9 @@ def add_transaction(request, form: ModelForm, transaction_type: str):
         transaction.save()
 
         # Update value in account
-        account = Account.objects.get(name=transaction.account.name)
+        account = Account.objects.get(
+            name=transaction.account.name, user=request.user
+        )
         if transaction_type == 'expanse':
             account.balance -= transaction.value
         else:

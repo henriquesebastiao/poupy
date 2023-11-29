@@ -1,0 +1,13 @@
+{% extends 'base/app/base_form.html' %}
+{% block title %}
+    📝 Delete account | Poupy
+{% endblock %}
+{% block tag_form %}
+    {% url 'delete_account_confirm' %}
+{% endblock %}
+{% block action_title %}
+	Delete account
+{% endblock %}
+{% block button_text %}
+	Delete
+{% endblock %}

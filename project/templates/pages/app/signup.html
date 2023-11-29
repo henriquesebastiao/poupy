@@ -3,7 +3,7 @@
     📝 Signup | Poupy
 {% endblock %}
 {% block action-title %}
-    Cadastre-se
+    Register
 {% endblock %}
 {% block inputs %}
     <form action="{% url 'user_create' %}" method="post">
@@ -16,9 +16,9 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="call-action">Já possui uma conta? <a href="{% url 'login' %}">Faça login</a></div>
+        <div class="call-action">Already have an account? <a href="{% url 'login' %}">Log in</a></div>
         <div>
-            <button class="btn btn-signup">Cadastrar</button>
+            <button class="btn btn-signup">Register</button>
         </div>
     </form>
 {% endblock %}

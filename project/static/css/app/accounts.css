@@ -8,6 +8,7 @@
 
 .accounts-container {
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 main {
@@ -23,6 +24,38 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.manage-accounts-container {
+    margin-bottom: 1rem;
+    display: flex;
+    column-gap: 1rem;
+}
+
+.overview-actions-card {
+    width: 200px;
+    height: 60px;
+    background: var(--color-surface-500);
+    border-radius: var(--theme-rounded-base);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 0 15px var(--color-surface-900);
+    transition: transform .2s ease-in-out;
+}
+
+.overview-actions-card:hover {
+    transform: scale(1.05);
+}
+
+.actions-icon {
+    font-size: 1.5rem;
+}
+
+.message {
+    margin-bottom: 1rem;
 }
 
 .my-accounts-title {

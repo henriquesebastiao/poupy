@@ -8,7 +8,7 @@ from ..models import Transaction, User
 
 @login_required(login_url='login')
 def transactions(request):
-    user = User.objects.get(email='contato@henriquesebastiao.com')
+    user = User.objects.get(email=request.user.email)
     all_transactions = Transaction.objects.filter(user=user).order_by('-id')
 
     return render(
@@ -29,7 +29,7 @@ def transaction_edit(request, transaction_id):
 
     if form.is_valid():
         form.save()
-        messages.success(request, 'Alterações salvas com sucesso.')
+        messages.success(request, 'Changes saved successfully.')
 
     return render(
         request, 'pages/app/transaction_edit.html', context={'form': form}

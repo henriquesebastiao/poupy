@@ -10,22 +10,22 @@
     <div class="horizontal-section primary-card overview-card">
         <div class="overview-info-container">
             <div class="overview-welcome">
-                <h2>Olá, {{ request.user.first_name }}! 😊</h2>
+                <h2>Hello, {{ request.user.first_name }}! 😊</h2>
             </div>
             <div class="overview-info">
                 <div class="overview-info-card monthly-income">
-                    <span class="overview-info-card-title">Rendas do mês</span>
+                    <span class="overview-info-card-title">Monthly income</span>
                     <span class="value value-positive">R$ {{ monthly_incomes }}</span>
                 </div>
 
                 <div class="overview-info-card monthly-income">
-                    <span class="overview-info-card-title">Despesas do mês</span>
+                    <span class="overview-info-card-title">Monthly expenses</span>
                     <span class="value value-negative">R$ {{ monthly_expenses }}</span>
                 </div>
 
                 <!-- Saldo Total -->
                 <div class="overview-info-card monthly-income">
-                    <span class="overview-info-card-title">Saldo Total</span>
+                    <span class="overview-info-card-title">Total balance</span>
                     <span class="value value-general">R$ {{ total_balance }}</span>
                 </div>
             </div>
@@ -43,14 +43,14 @@
             <a href="{% url 'new_income' %}">
                 <div class="overview-actions-card">
                     <i class="actions-icon value-positive fa-solid fa-circle-plus"></i>
-                    <span class="value-positive">Receita</span>
+                    <span class="value-positive">Income</span>
                 </div>
             </a>
             {% if total_balance > 0 and number_accounts > 1 %}
                 <a href="{% url 'new_transfer' %}">
                     <div class="overview-actions-card">
                         <i class="actions-icon value-general fa-solid fa-money-bill-transfer"></i>
-                        <span class="value-general">Transferência</span>
+                        <span class="value-general">Transfer</span>
                     </div>
                 </a>
             {% endif %}
@@ -62,7 +62,7 @@
             <div class="list-accounts primary-card">
                 <div class="inner-margin">
                     <div class="my-accounts-title">
-                        <span>Minhas contas</span>
+                        <span>My accounts</span>
                         <i class="fa-solid fa-piggy-bank"></i>
                     </div>
                     <div class="card-account-container">
@@ -79,7 +79,7 @@
             <div class="transaction-history primary-card">
                 <div class="inner-margin">
                     <div class="transaction-history-title">
-                        <span>Maiores transações do mês</span>
+                        <span>Biggest transactions of the month</span>
                         <i class="fa-solid fa-cash-register"></i>
                     </div>
                     <div class="card-transaction-container">

@@ -7,7 +7,7 @@ from ..utils import add_transaction
 
 @login_required(login_url='login')
 def new_income(request):
-    form = NewTransactionForm()
+    form = NewTransactionForm(user=request.user)
     return render(
         request,
         'pages/app/new_income.html',

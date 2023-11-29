@@ -28,7 +28,7 @@ def user_create(request):
         user = form.save(commit=False)
         user.set_password(user.password)  # Salva a senha criptografada no db
         user.save()
-        messages.success(request, 'Usuário criado com sucesso.')
+        messages.success(request, 'User created successfully.')
 
         del request.session['signup_form_data']
 
