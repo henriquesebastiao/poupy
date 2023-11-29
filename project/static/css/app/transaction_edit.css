@@ -1,0 +1,72 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-edit-container {
+    width: 50%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-input-external {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 1rem;
+    width: 100%;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.group-input {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+
+.group-input input,
+.group-input select {
+    margin-top: .5rem;
+    padding: .5rem;
+    border-radius: var(--theme-rounded-base);
+    background: var(--color-surface-500);
+    border: var(--color-surface-600) 1px solid;
+    color: white;
+}
+
+.title-input {
+    color: var(--color-surface-200);
+    font-weight: 400;
+}
+
+.btn {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: .5rem;
+    width: 100%;
+    border-radius: var(--theme-rounded-base);
+    background: var(--color-success-700);
+    border: var(--color-success-500) 1px solid;
+    color: white;
+    font-weight: 500;
+    transition: background .5s ease;
+}
+
+.btn-save:hover {
+    background: var(--color-success-500);
+}

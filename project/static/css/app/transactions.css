@@ -89,3 +89,11 @@ main {
 .value {
     font-weight: 700;
 }
+
+.link-transaction {
+    transition: transform .2s ease-in-out;
+}
+
+.link-transaction:hover {
+    transform: scale(1.05);
+}

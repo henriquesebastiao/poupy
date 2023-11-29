@@ -104,6 +104,23 @@ body {
     border-radius: var(--theme-rounded-base);
 }
 
+.horizontal-section {
+    width: 80%;
+}
+
+/* Color values */
+.value-positive {
+    color: var(--color-success-400);
+}
+
+.value-negative {
+    color: var(--color-error-500);
+}
+
+.value-general {
+    color: var(--color-surface-100);
+}
+
 /* Messages */
 .message {
     padding: .5rem;

@@ -7,10 +7,6 @@
     margin-bottom: 5rem; /* temporário */
 }
 
-.horizontal-section {
-    width: 80%;
-}
-
 .inner-margin {
     margin: 2rem;
     width: 100%;
@@ -109,18 +105,6 @@
 .value {
     font-size: 1.4rem;
     font-weight: bold;
-}
-
-.value-positive {
-    color: var(--color-success-400);
-}
-
-.value-negative {
-    color: var(--color-error-500);
-}
-
-.value-general {
-    color: var(--color-surface-100);
 }
 
 .transaction-history-and-list-accounts {
@@ -225,4 +209,11 @@
     padding-right: 1rem;
     font-weight: bold;
     font-size: 1.4rem;
+}
+
+.not-found-accounts {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 2rem;
 }

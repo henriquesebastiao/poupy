@@ -1,0 +1,34 @@
+{% extends 'base/app/base.html' %}
+{% load static %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static 'css/app/transaction_edit.css' %}" type="text/css">
+{% endblock %}
+{% block title %}
+    📝 Edit transaction | Poupy
+{% endblock %}
+{% block main %}
+    <div class="horizontal-section primary-card account-edit-container">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="group-input-external">
+                <div class="title">Edit transaction</div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message {{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% for field in form %}
+                    <div class="group-input">
+                        <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <button class="btn btn-save">Salvar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

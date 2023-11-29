@@ -1,0 +1,29 @@
+{% extends 'base/app/base.html' %}
+{% load static %}
+{% block title %}
+    🏦 Contas | Poupy
+{% endblock %}
+{% block extend_css %}
+    <link rel="stylesheet" href="{% static 'css/app/accounts.css' %}" type="text/css">
+{% endblock %}
+{% block main %}
+    <div class="primary-card horizontal-section accounts-container">
+        <!-- Card que lista as contas do usuário contas -->
+        <div class="inner-margin">
+            <div class="my-accounts-title">
+                <span>Minhas contas</span>
+                <i class="fa-solid fa-piggy-bank"></i>
+            </div>
+            <div class="card-account-container">
+                {% for account in accounts %}
+                    <a class="link-account" href="{% url 'account_edit' account.id %}">
+                        <div class="card-account primary-card">
+                            <div class="name-account">{{ account.name }}</div>
+                            <div class="account-balance value-positive">R$ {{ account.balance }}</div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

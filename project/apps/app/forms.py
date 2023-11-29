@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from .models import Account, Transaction
+
 
 class RegisterForm(forms.ModelForm):
     repeat_password = forms.CharField(
@@ -67,3 +69,52 @@ class LoginForm(forms.Form):
         label='Senha',
         widget=forms.PasswordInput(attrs={'placeholder': 'Insira sua senha'}),
     )
+
+
+class AccountEditForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = [
+            'name',
+            'balance',
+        ]
+
+        labels = {
+            'name': 'Nome da conta',
+            'balance': 'Saldo',
+        }
+
+        widgets = {
+            'name': forms.TextInput(
+                attrs={'placeholder': 'Insira o nome da conta'}
+            ),
+            'balance': forms.NumberInput(
+                attrs={'placeholder': 'Insira o saldo da conta'}
+            ),
+        }
+
+
+class TransactionsEditForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = [
+            'description',
+            'account',
+            'value',
+            'transaction_date',
+            'type',
+        ]
+
+        labels = {
+            'description': 'Description',
+            'account': 'Account',
+            'value': 'Value',
+            'transaction_date': 'Transaction date',
+            'type': 'Type',
+        }
+
+        widgets = {
+            'description': forms.TextInput(
+                attrs={'placeholder': 'Insert the description of transaction'}
+            )
+        }

@@ -7,7 +7,12 @@ from django.http import Http404
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
-from .forms import LoginForm, RegisterForm
+from .forms import (
+    AccountEditForm,
+    LoginForm,
+    RegisterForm,
+    TransactionsEditForm,
+)
 from .models import Account, Transaction, User
 
 
@@ -15,6 +20,7 @@ from .models import Account, Transaction, User
 def app(request):
     user = User.objects.get(email=request.user.email)
     accounts = Account.objects.filter(user=user)
+    number_accounts = len(accounts)
     total_balance = sum([account.balance for account in accounts])
 
     bigger_transactions_of_month = Transaction.objects.filter(
@@ -62,6 +68,7 @@ def app(request):
             'user_first_name': user.first_name,
             'total_balance': total_balance,
             'accounts': accounts,
+            'number_accounts': number_accounts,
             'bigger_transactions_of_month': bigger_transactions_of_month,
             'monthly_expenses': monthly_expenses,
             'monthly_incomes': monthly_incomes,
@@ -134,7 +141,7 @@ def login_create(request):
     return redirect(app_url)
 
 
-@login_required(login_url='login', redirect_field_name='next')
+@login_required(login_url='login')
 def logout_view(request):
     if not request.POST:
         raise Http404()
@@ -154,5 +161,56 @@ def transactions(request):
         'pages/app/transactions.html',
         context={
             'all_transactions': all_transactions,
+        },
+    )
+
+
+@login_required(login_url='login')
+def transaction_edit(request, transaction_id):
+    transaction = Transaction.objects.get(id=transaction_id, user=request.user)
+    form = TransactionsEditForm(
+        data=request.POST or None, instance=transaction
+    )
+
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Alterações salvas com sucesso.')
+
+    return render(
+        request, 'pages/app/transaction_edit.html', context={'form': form}
+    )
+
+
+@login_required(login_url='login')
+def accounts_view(request):
+    user = User.objects.get(email=request.user.email)
+    accounts = Account.objects.filter(user=user)
+    return render(
+        request,
+        'pages/app/accounts.html',
+        context={
+            'accounts': accounts,
+        },
+    )
+
+
+@login_required(login_url='login')
+def account_edit(request, account_id):
+    account = Account.objects.get(id=account_id, user=request.user)
+
+    form = AccountEditForm(data=request.POST or None, instance=account)
+
+    if form.is_valid():
+        account = form.save(commit=False)
+        # Format the name account for title and remove blank spaces the sides
+        account.name = request.POST['name'].strip().title()
+        account.save()
+        messages.success(request, 'Alterações salvas com sucesso.')
+
+    return render(
+        request,
+        'pages/app/account_edit.html',
+        context={
+            'form': form,
         },
     )
