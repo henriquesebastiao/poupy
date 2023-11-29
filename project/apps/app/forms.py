@@ -118,3 +118,22 @@ class TransactionsEditForm(forms.ModelForm):
                 attrs={'placeholder': 'Insert the description of transaction'}
             )
         }
+
+
+class NewExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = [
+            'description',
+            'account',
+            'value',
+        ]
+
+        widgets = {
+            'description': forms.TextInput(
+                attrs={'placeholder': 'Insert the description of transaction'}
+            ),
+            'value': forms.NumberInput(
+                attrs={'placeholder': 'Insert the value'}
+            ),
+        }

@@ -1,9 +1,12 @@
 {% extends 'base/app/base_form.html' %}
 {% block title %}
-    📝 Edit transaction | Poupy
+    📝 Add expanse | Poupy
+{% endblock %}
+{% block tag_form %}
+    {% url 'new_expanse_create' %}
 {% endblock %}
 {% block action_title %}
-	Edit transaction
+	Add expanse
 {% endblock %}
 {% block button_text %}
 	Save

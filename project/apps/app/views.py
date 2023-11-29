@@ -10,6 +10,7 @@ from django.urls import reverse
 from .forms import (
     AccountEditForm,
     LoginForm,
+    NewExpenseForm,
     RegisterForm,
     TransactionsEditForm,
 )
@@ -214,3 +215,37 @@ def account_edit(request, account_id):
             'form': form,
         },
     )
+
+
+@login_required(login_url='login')
+def new_expanse(request):
+    form = NewExpenseForm()
+    return render(
+        request,
+        'pages/app/new_expanse.html',
+        context={
+            'form': form,
+        },
+    )
+
+
+@login_required(login_url='login')
+def new_expanse_create(request):
+    if not request.POST:
+        raise Http404()
+    post = request.POST
+    form = NewExpenseForm(post)
+
+    if form.is_valid():
+        # Add new expanse
+        transaction = form.save(commit=False)
+        transaction.transaction_date = datetime.now()
+        transaction.user_id = request.user.id
+        transaction.save()
+
+        # Update value in account
+        account = Account.objects.get(name=transaction.account.name)
+        account.balance -= transaction.value
+        account.save()
+
+    return redirect('app')

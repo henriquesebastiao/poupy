@@ -33,10 +33,10 @@
         <div class="overview-divider"></div>
         <div class="overview-actions-container">
             {% if total_balance > 0 %}
-                <a href="#">
+                <a href="{% url 'new_expanse' %}">
                     <div class="overview-actions-card">
                         <i class="actions-icon value-negative fa-solid fa-circle-minus"></i>
-                        <span class="value-negative">Despesa</span>
+                        <span class="value-negative">Expanse</span>
                     </div>
                 </a>
             {% endif %}

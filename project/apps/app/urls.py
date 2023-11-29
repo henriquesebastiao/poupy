@@ -21,4 +21,10 @@ urlpatterns = [
         views.account_edit,
         name='account_edit',
     ),
+    path('new-expanse/', views.new_expanse, name='new_expanse'),
+    path(
+        'new-expanse/create/',
+        views.new_expanse_create,
+        name='new_expanse_create',
+    ),
 ]
