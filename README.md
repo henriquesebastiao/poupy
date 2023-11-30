@@ -1,12 +1,25 @@
-<img src="utils/img/bitmap.png" alt="Poupy" width="150"/>
+<h1 align="center">
+    <img src="utils/img/bitmap.png" alt="Poupy" width="150"/>
+    <br>
+</h1>
 
-### Manage your personal budget.
+<p align="center"><strong>Manage your personal budget.</strong></p>
 
-[![Status Development](https://img.shields.io/badge/Status-development-red)](https://github.com/henriquesebastiao/poupy)
-[![CI](https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml/badge.svg)](https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml)
-[![LICENSE](https://img.shields.io/github/license/henriquesebastiao/poupy)](LICENSE)
+<p align="center">
+  <a href="https://github.com/henriquesebastiao/poupy">
+    <img src="https://img.shields.io/badge/Status-development-red" alt="Development status" />
+  </a>
+  <a href="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml">
+    <img src="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml/badge.svg" alt="CI status"/>
+  </a>
+  <a href="https://github.com/henriquesebastiao/poupy/blob/main/LICENSE">
+    <img alt="LICENSE" src="https://img.shields.io/github/license/henriquesebastiao/poupy"/>
+  </a>
+</p>
 
-<img src="utils/img/screenshot.png" alt="Preview"/>
+<p align="center">
+  <img src="utils/img/screenshot.png" alt="Preview"/>
+</p>
 
 Poupy is a webapp that allows you to create and manage your own personal budget.
 It is a simple and intuitive application that allows you to manage your expenses and income, and also allows you to
