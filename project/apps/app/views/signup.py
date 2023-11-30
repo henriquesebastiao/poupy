@@ -31,6 +31,9 @@ def user_create(request):
         messages.success(request, 'User created successfully.')
 
         del request.session['signup_form_data']
+    else:
+        messages.error(request, 'Invalid form, try again.')
+        return redirect('signup')
 
     # Após o usuário ser criado ele já redirecionado para fazer login
     return redirect('login')

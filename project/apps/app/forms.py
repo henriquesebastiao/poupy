@@ -2,9 +2,26 @@ from django import forms
 from django.contrib.auth.models import User
 
 from .models import Account, Transaction
+from .utils import strong_password
 
 
 class SignupForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        """To avoid having to overwrite the fields, I just define them as required"""
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['email'].required = True
+        # Username and password are already required by default
+
+    password = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Enter a secure password'}
+        ),
+        label='Password',
+        validators=[strong_password],
+    )
+
     repeat_password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
@@ -43,9 +60,6 @@ class SignupForm(forms.ModelForm):
             ),
             'email': forms.EmailInput(
                 attrs={'placeholder': 'Enter your best email'}
-            ),
-            'password': forms.PasswordInput(
-                attrs={'placeholder': 'Enter a secure password'}
             ),
         }
 

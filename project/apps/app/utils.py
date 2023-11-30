@@ -1,5 +1,7 @@
+import re
 from datetime import datetime
 
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.http import Http404
 
@@ -36,3 +38,17 @@ def add_transaction(request, form: ModelForm, transaction_type: str):
         else:
             account.balance += transaction.value
         account.save()
+
+
+def strong_password(password):
+    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
+
+    if not regex.match(password):
+        raise ValidationError(
+            (
+                'Password must have at least one uppercase letter, '
+                'one lowercase letter and one number. The length should be '
+                'at least 8 characters.'
+            ),
+            code='invalid',
+        )

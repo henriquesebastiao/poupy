@@ -13,6 +13,7 @@
                 <div class="group-input">
                     <label class="title-input" for="{{ field.id_for_label }}">{{ field.label }}</label>
                     {{ field }}
+                    {{ field.errors }}
                 </div>
             {% endfor %}
         </div>
