@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from .models import Account, Transaction
 
 
-class RegisterForm(forms.ModelForm):
+class SignupForm(forms.ModelForm):
     repeat_password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
@@ -29,12 +29,6 @@ class RegisterForm(forms.ModelForm):
             'last_name': 'Last name',
             'username': 'Username',
             'email': 'Email',
-        }
-
-        # Ver isso melhor
-        error_messages = {
-            'email': {'required': 'You need to enter an email address'},
-            'username': {'required': 'You need to enter a username'},
         }
 
         widgets = {

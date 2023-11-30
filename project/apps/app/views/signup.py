@@ -2,12 +2,12 @@ from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect, render
 
-from ..forms import RegisterForm
+from ..forms import SignupForm
 
 
 def signup(request):
     signup_form_data = request.session.get('signup_form_data', None)
-    form = RegisterForm(signup_form_data)
+    form = SignupForm(signup_form_data)
     return render(
         request,
         'pages/app/signup.html',
@@ -22,7 +22,7 @@ def user_create(request):
         raise Http404()
     post = request.POST
     request.session['signup_form_data'] = post
-    form = RegisterForm(post)
+    form = SignupForm(post)
 
     if form.is_valid():
         user = form.save(commit=False)
