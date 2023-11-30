@@ -105,8 +105,6 @@ class TransactionsEditForm(forms.ModelForm):
             'type': 'Type',
         }
 
-        widgets = {'description': forms.TextInput(attrs={'placeholder': ''})}
-
 
 class NewTransactionForm(forms.ModelForm):
     class Meta:
