@@ -17,7 +17,7 @@ class SignupTest(TestCase):
             resolve('/app/user-create/').func.__name__, 'user_create'
         )
 
-    def test_if_url_signup_return_status_code_200(self):
+    def test_if_url_signup_get_method_return_status_code_200(self):
         self.assertEqual(self.client.get(reverse('signup')).status_code, 200)
 
     def test_if_view_signup_load_correct_template(self):
