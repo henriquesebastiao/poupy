@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 from .models import Account, Transaction
 from .utils import strong_password
@@ -62,6 +63,26 @@ class SignupForm(forms.ModelForm):
                 attrs={'placeholder': 'Enter your best email'}
             ),
         }
+
+    def clean_email(self):
+        """Validates that the email is unique"""
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError('This email is already in use.')
+        return email
+
+    def clean(self):
+        """Validates that the password and repeat_password fields are equal"""
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        repeat_password = cleaned_data.get('repeat_password')
+
+        if password != repeat_password:
+            raise ValidationError(
+                {
+                    'repeat_password': 'Password and password repeat must be equal.'
+                }
+            )
 
 
 class LoginForm(forms.Form):

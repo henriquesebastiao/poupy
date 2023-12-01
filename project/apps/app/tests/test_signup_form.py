@@ -130,5 +130,35 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
             reverse('user_create'), data=self.form_data, follow=True
         )
         self.assertIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
+            'Password must have at least one uppercase letter, '
+            'one lowercase letter and one number. '
+            'The length should be at least 8 characters.',
+            response.content.decode('utf-8'),
+        )
+
+    def test_field_password_repeat_not_accept_different_password(self):
+        """Test if the form is invalid when the field password and repeat_password are different."""
+        self.form_data['repeat_password'] = 'ABCabc@123'
+        response = self.client.post(
+            reverse('user_create'), data=self.form_data, follow=True
+        )
+        self.assertIn(
+            'Password and password repeat must be equal.',
+            response.content.decode('utf-8'),
+        )
+
+    def test_field_email_not_register_user_with_email_existing(self):
+        """Test if the form is invalid when the field email is already in use."""
+        form_data_with_email_existing = self.form_data
+        self.client.post(
+            reverse('user_create'), data=self.form_data, follow=True
+        )
+        response_with_email_existing = self.client.post(
+            reverse('user_create'),
+            data=form_data_with_email_existing,
+            follow=True,
+        )
+        self.assertIn(
+            'This email is already in use.',
+            response_with_email_existing.content.decode('utf-8'),
         )
