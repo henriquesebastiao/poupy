@@ -25,6 +25,22 @@ Poupy is a webapp that allows you to create and manage your own personal budget.
 It is a simple and intuitive application that allows you to manage your expenses and income, and also allows you to
 create your own categories and subcategories.
 
+## How to execute the project?
+```shell
+git clone https://github.com/henriquesebastiao/poupy.git
+cd poupy
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+Now you must open the project in the browser:
+```
+http://localhost:8000/
+```
+
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
