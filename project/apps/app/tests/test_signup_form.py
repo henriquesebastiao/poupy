@@ -1,5 +1,4 @@
-from unittest import TestCase
-
+from django.test import TestCase
 from django.test import TestCase as DjangoTesteCase
 from django.urls import reverse
 
@@ -162,3 +161,24 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
             'This email is already in use.',
             response_with_email_existing.content.decode('utf-8'),
         )
+
+    def test_user_created_can_login(self):
+        """Test if the user created can login."""
+        self.form_data.update(
+            {
+                'username': 'tes_tuser',
+                'password': '@Pass123',
+                'repeat_password': '@Pass123',
+            }
+        )
+
+        self.client.post(
+            reverse('user_create'), data=self.form_data, follow=True
+        )
+
+        is_authenticated = self.client.login(
+            username=self.form_data.get('username'),
+            password=self.form_data.get('password'),
+        )
+
+        self.assertTrue(is_authenticated)

@@ -21,6 +21,7 @@ pytest = "^7.4.3"
 pytest-django = "^4.7.0"
 coverage = "^7.3.2"
 pytest-cov = "^4.1.0"
+selenium = "^4.15.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -43,6 +44,9 @@ pythonpath = "."
 DJANGO_SETTINGS_MODULE = "project.settings"
 python_files = "test.py tests.py test_*.py tests_*.py *_test.py *_tests.py"
 addopts = "--doctest-modules --strict-markers -v"
+markers = [
+    "functional_test: Run tests that are selenium based",
+]
 
 [tool.coverage.run]
 branch = true
@@ -54,5 +58,6 @@ directory = "htmlcov"
 [tool.taskipy.tasks]
 lint = 'ruff . && blue --check . --diff'
 format = 'blue .  && isort .'
-test = 'pytest -s -x --cov=project -vv'
+test = 'pytest -m "not functional_test" -s -x --cov=project -vv'
+functional_test = 'pytest -m "functional_test"'
 coverage = 'coverage run -m pytest && coverage html'

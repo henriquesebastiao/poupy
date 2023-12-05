@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="utils/img/bitmap.png" alt="Poupy" width="150"/>
+    <img src="project/utils/img/bitmap.png" alt="Poupy" width="150"/>
     <br>
 </h1>
 
@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img src="utils/img/screenshot.png" alt="Preview"/>
+  <img src="project/utils/img/screenshot.png" alt="Preview"/>
 </p>
 
 Poupy is a webapp that allows you to create and manage your own personal budget.
