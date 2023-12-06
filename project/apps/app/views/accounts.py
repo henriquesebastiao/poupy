@@ -68,7 +68,7 @@ def new_account_create(request):
         account = Account(
             name=account.name,
             user=request.user,
-            balance=0.00,
+            balance=request.POST['balance'],
         )
 
         account.save()
