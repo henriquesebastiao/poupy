@@ -1,7 +1,7 @@
-from project.utils.testing import AppMixin, FunctionalTestBase
+from project.utils.testing import FunctionalTestBase
 
 
-class WebsiteHomePageFunctionalTest(FunctionalTestBase, AppMixin):
+class WebsiteHomePageFunctionalTest(FunctionalTestBase):
     def test_if_website_home_page_contain_correct_content(self):
         content = self.get_content('body')
         self.assertIn(

@@ -1,8 +1,8 @@
 import time
 
-from django.contrib.auth.models import User
 from django.test.selenium import LiveServerTestCase
 from pytest import mark
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
 from project.utils.browser import make_chrome_browser
@@ -43,20 +43,72 @@ class FunctionalTestBase(LiveServerTestCase):
         self.browser.get(self.live_server_url + url)
         return self.browser.find_element(By.TAG_NAME, html_tag_name)
 
-
-class AppMixin:
-    @staticmethod
-    def make_user(
-        username='test_user',
-        password='test_password',
-        first_name='Test',
-        last_name='Last',
-        email='test@email.com',
-    ):
-        User.objects.create_user(
-            username=username,
-            password=password,
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
+    def login(self, username: str, password: str) -> None:
+        """
+        Method to login user.
+        Args:
+            username: username of the user to login
+            password: password of the user to login
+        """
+        self.browser.get(self.live_server_url + '/app/')
+        # Input username
+        username_input = self.browser.find_element(
+            By.XPATH, '//input[@placeholder="Enter your username"]'
         )
+        username_input.send_keys(username)
+        username_input.send_keys(Keys.TAB)
+
+        # Input password
+        password_input = self.browser.find_element(
+            By.XPATH, '//input[@placeholder="Enter your password"]'
+        )
+        password_input.send_keys(password)
+        password_input.send_keys(Keys.ENTER)
+
+    def register(
+        self,
+        first_name: str = 'Tester',
+        last_name: str = 'Last',
+        username: str = 'test',
+        email: str = 'test@email.com',
+        password: str = 'Test@123',
+    ) -> dict[str, str]:
+        """
+        Method to register user for functional tests.
+        Args:
+            first_name: fist name of the user to register
+            last_name: last name of the user to register
+            username: username of the user to register
+            email: email of the user to register
+            password: password of the user to register
+
+        Returns:
+            dict with username and password of the user
+        """
+        # User open page
+        self.browser.get(self.live_server_url + '/app/signup/')
+
+        inputs = [
+            ['Enter your first name', first_name],
+            ['Enter your last name', last_name],
+            ['Enter a username', username],
+            ['Enter your best email', email],
+            ['Enter a secure password', password],
+            ['Enter your password again', password],
+        ]
+
+        for item in inputs:
+            # You see an input field with the text "Enter your first name"
+            signup_inputs = self.browser.find_element(
+                By.XPATH, f'//input[@placeholder="{item[0]}"]'
+            )
+            # Input first name
+            signup_inputs.send_keys(item[1])
+            # Go to next input
+            signup_inputs.send_keys(Keys.TAB)
+
+            # Verify if is last repeat and press enter
+            if item[0] == inputs[5][0]:
+                signup_inputs.send_keys(Keys.ENTER)
+
+        return {'password': password, 'username': username}
