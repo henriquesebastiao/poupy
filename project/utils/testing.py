@@ -65,7 +65,7 @@ class FunctionalTestBase(LiveServerTestCase):
         password_input.send_keys(password)
         password_input.send_keys(Keys.ENTER)
 
-    def register(
+    def user_register(
         self,
         first_name: str = 'Tester',
         last_name: str = 'Last',

@@ -13,9 +13,11 @@ class AppFunctionalTest(FunctionalTestBase):
         self.assertIn("Don't have an account? Register", content.text)
         self.assertIn('Login', content.text)
 
-    def test_signup_an_login_user_and_if_page_presents_correct_content_for_new_user(self):
+    def test_signup_an_login_user_and_if_page_presents_correct_content_for_new_user(
+        self,
+    ):
         # In register page
-        user = self.register()
+        user = self.user_register()
 
         # In login page
         self.login(user['username'], user['password'])
@@ -26,7 +28,9 @@ class AppFunctionalTest(FunctionalTestBase):
         self.assertIn('Monthly income', body.text)
         self.assertIn('Monthly expenses', body.text)
         self.assertIn('Total balance', body.text)
-        self.assertIn("It looks like you don't have any accounts yet.", body.text)
+        self.assertIn(
+            "It looks like you don't have any accounts yet.", body.text
+        )
 
         header = self.browser.find_element(By.TAG_NAME, 'header')
         self.assertIn('HOME', header.text)
