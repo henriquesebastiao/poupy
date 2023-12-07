@@ -4,6 +4,7 @@ from django.test.selenium import LiveServerTestCase
 from pytest import mark
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 
 from project.utils.browser import make_chrome_browser
 
@@ -112,3 +113,36 @@ class FunctionalTestBase(LiveServerTestCase):
                 signup_inputs.send_keys(Keys.ENTER)
 
         return {'password': password, 'username': username}
+
+    def get_input(self, content: str, tag: str = 'input', of='placeholder'):
+        """
+        Obtain input field by content.
+        Args:
+            content: content of the input field
+            tag: tag of the input field
+            of: attribute of the input field
+
+        Returns:
+            input field
+        """
+        if tag == 'input':
+            return self.browser.find_element(
+                By.XPATH, f'//{tag}[@{of}="{content}"]'
+            )
+        elif tag == 'span' or tag == 'a':
+            return self.browser.find_element(
+                By.XPATH, f'//{tag}[{of}()="{content}"]'
+            )
+
+    @staticmethod
+    def value_send_keys(field: WebElement, value: str):
+        """
+        This method deletes the `0.0` characters that are in the value field before inserting the actual value.
+        Args:
+            field: input field
+            value: value to insert in the field
+        """
+        for _ in range(3):
+            field.send_keys(Keys.DELETE)
+
+        return field.send_keys(value)
