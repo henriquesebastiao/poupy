@@ -1,34 +1,31 @@
 from datetime import datetime
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.http import Http404
-from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
+from django.views.generic import FormView
 
 from ..forms import TransferForm
 from ..models import Account, Transaction
 
 
-@login_required(login_url='login')
-def new_transfer(request):
-    form = TransferForm()
-    return render(
-        request,
-        'pages/app/new_transfer.html',
-        context={
-            'form': form,
-        },
-    )
+class TransferView(LoginRequiredMixin, FormView):
+    login_url = 'login'
+
+    template_name = 'pages/app/new_transfer.html'
+    form_class = TransferForm
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
 
 
-@login_required(login_url='login')
-def new_transfer_create(request):
-    if not request.POST:
-        raise Http404()
+class TransferCreateView(LoginRequiredMixin, FormView):
+    login_url = 'login'
 
-    form = TransferForm(request.POST)
+    template_name = 'pages/app/new_transfer.html'
+    form_class = TransferForm
 
-    if form.is_valid():
+    def form_valid(self, form):
         data = form.cleaned_data
         account_origin = Account.objects.get(name=data['account_origin'])
         account_destination = Account.objects.get(
@@ -38,7 +35,7 @@ def new_transfer_create(request):
         if account_origin.balance >= data['value']:
             transaction_origin = Transaction(
                 description=data['description'],
-                user=request.user,
+                user=self.request.user,
                 account=account_origin,
                 value=data['value'],
                 transaction_date=datetime.now(),
@@ -46,7 +43,7 @@ def new_transfer_create(request):
             )
             transaction_destination = Transaction(
                 description=data['description'],
-                user=request.user,
+                user=self.request.user,
                 account=account_destination,
                 value=data['value'],
                 transaction_date=datetime.now(),
@@ -63,9 +60,12 @@ def new_transfer_create(request):
             account_destination.save()
 
             return redirect('app')
-
         else:
             messages.error(
-                request, 'Saldo insuficiente para realizar a transferência.'
+                self.request, 'Insufficient balance to make the transfer.'
             )
-            return redirect('new_transfer')
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error in data validation.')
+        return super().form_invalid(form)

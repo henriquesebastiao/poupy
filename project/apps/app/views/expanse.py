@@ -1,23 +1,37 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from datetime import datetime
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, FormView
 
 from ..forms import NewTransactionForm
-from ..utils import add_transaction
+from ..models import Account
 
 
-@login_required(login_url='login')
-def new_expanse(request):
-    form = NewTransactionForm()
-    return render(
-        request,
-        'pages/app/new_expanse.html',
-        context={
-            'form': form,
-        },
-    )
+class ExpanseView(LoginRequiredMixin, FormView):
+    login_url = 'login'
+
+    template_name = 'pages/app/new_expanse.html'
+    form_class = NewTransactionForm
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
 
 
-@login_required(login_url='login')
-def new_expanse_create(request):
-    add_transaction(request, NewTransactionForm(request.POST), 'expanse')
-    return redirect('app')
+class ExpanseCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'login'
+
+    form_class = NewTransactionForm
+    success_url = reverse_lazy('app')
+
+    def form_valid(self, form):
+        transaction = form.save(commit=False)
+        transaction.transaction_date = datetime.now()
+        transaction.user_id = self.request.user.id
+
+        account = Account.objects.get(
+            name=transaction.account.name, user=self.request.user
+        )
+        account.balance -= transaction.value
+        account.save()
+        return super().form_valid(form)

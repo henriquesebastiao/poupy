@@ -1,36 +1,39 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, UpdateView
 
 from ..forms import TransactionsEditForm
 from ..models import Transaction, User
 
 
-@login_required(login_url='login')
-def transactions(request):
-    user = User.objects.get(email=request.user.email)
-    all_transactions = Transaction.objects.filter(user=user).order_by('-id')
+class TransactionsView(LoginRequiredMixin, TemplateView):
+    login_url = 'login'
 
-    return render(
-        request,
-        'pages/app/transactions.html',
-        context={
-            'all_transactions': all_transactions,
-        },
-    )
+    template_name = 'pages/app/transactions.html'
+
+    def get_context_data(self, **kwargs):
+        user = User.objects.get(email=self.request.user.email)
+        all_transactions = Transaction.objects.filter(user=user).order_by(
+            '-id'
+        )
+
+        context = super().get_context_data(**kwargs)
+        context['all_transactions'] = all_transactions
+        return context
 
 
-@login_required(login_url='login')
-def transaction_edit(request, transaction_id):
-    transaction = Transaction.objects.get(id=transaction_id, user=request.user)
-    form = TransactionsEditForm(
-        data=request.POST or None, instance=transaction
-    )
+class TransactionEditView(LoginRequiredMixin, UpdateView):
+    login_url = 'login'
 
-    if form.is_valid():
-        form.save()
-        messages.success(request, 'Changes saved successfully.')
+    model = Transaction
+    form_class = TransactionsEditForm
+    template_name = 'pages/app/transaction_edit.html'
+    pk_url_kwarg = 'transaction_id'
 
-    return render(
-        request, 'pages/app/transaction_edit.html', context={'form': form}
-    )
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)
+
+    def get_success_url(self):
+        messages.success(self.request, 'Changes saved successfully.')
+        return reverse_lazy('transactions')
