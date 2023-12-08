@@ -2,43 +2,45 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse
+from django.views.generic import FormView
 
 from ..forms import LoginForm
 
 
-def login_view(request):
-    form = LoginForm()
-    return render(
-        request,
-        'pages/app/login.html',
-        context={'form': form, 'form_action': reverse('login_create')},
-    )
+class LoginView(FormView):
+    template_name = 'pages/app/login.html'
+    form_class = LoginForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form_action'] = reverse('login_create')
+        return context
 
 
-def login_create(request):
-    if not request.POST:
-        raise Http404()
+class LoginCreateView(FormView):
+    template_name = 'pages/app/login.html'
+    form_class = LoginForm
 
-    form = LoginForm(request.POST)
-
-    if form.is_valid():
+    def form_valid(self, form):
         authenticate_user = authenticate(
-            request,
+            self.request,
             username=form.cleaned_data.get('username', ''),
             password=form.cleaned_data.get('password', ''),
         )
 
         if authenticate_user is not None:
-            login(request, authenticate_user)
+            login(self.request, authenticate_user)
+            # Após o usuário se autenticar, redireciona ele para o app
+            return redirect(reverse('app'))
         else:
-            messages.error(request, 'Invalid credentials.')
-    else:
-        messages.error(request, 'Error in data validation.')
+            messages.error(self.request, 'Invalid credentials.')
+            return super().form_invalid(form)
 
-    # Após o usuário se autenticar, redireciona ele para o app
-    return redirect(reverse('app'))
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error in data validation.')
+        return super().form_invalid(form)
 
 
 @login_required(login_url='login')

@@ -1,39 +1,32 @@
 from django.contrib import messages
-from django.http import Http404
-from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, FormView
 
 from ..forms import SignupForm
 
 
-def signup(request):
-    signup_form_data = request.session.get('signup_form_data', None)
-    form = SignupForm(signup_form_data)
-    return render(
-        request,
-        'pages/app/signup.html',
-        context={
-            'form': form,
-        },
-    )
+class SignupView(FormView):
+    template_name = 'pages/app/signup.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        self.request.session['signup_form_data'] = form.cleaned_data
+        return super().form_valid(form)
 
 
-def user_create(request):
-    if not request.POST:
-        raise Http404()
-    post = request.POST
-    request.session['signup_form_data'] = post
-    form = SignupForm(post)
+class UserCreateView(CreateView):
+    template_name = 'pages/app/signup.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('login')
 
-    if form.is_valid():
+    def form_valid(self, form):
         user = form.save(commit=False)
         user.set_password(user.password)  # Salva a senha criptografada no db
         user.save()
-        messages.success(request, 'User created successfully.')
+        messages.success(self.request, 'User created successfully.')
+        return super().form_valid(form)
 
-        del request.session['signup_form_data']
-    else:
-        messages.error(request, 'Invalid form, try again.')
-        return redirect('signup')
-
-    # Após o usuário ser criado ele já redirecionado para fazer login
-    return redirect('login')
+    def form_invalid(self, form):
+        messages.error(self.request, 'Invalid form, try again.')
+        return super().form_invalid(form)
