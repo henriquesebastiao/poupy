@@ -381,3 +381,5 @@ pyrightconfig.json
 # Generated using ignr.py - github.com/Antrikshy/ignr.py
 
 /static
+
+.idea
