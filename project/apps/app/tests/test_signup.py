@@ -10,12 +10,10 @@ class SignupTest(TestCase):
         self.assertEqual(reverse('user_create'), '/app/user-create/')
 
     def test_if_url_signup_render_correct_view(self):
-        self.assertEqual(resolve('/app/signup/').func.__name__, 'signup')
+        self.assertEqual(resolve('/app/signup/').view_name, 'signup')
 
     def test_if_url_user_create_render_correct_view(self):
-        self.assertEqual(
-            resolve('/app/user-create/').func.__name__, 'user_create'
-        )
+        self.assertEqual(resolve('/app/user-create/').view_name, 'user_create')
 
     def test_if_url_signup_get_method_return_status_code_200(self):
         self.assertEqual(self.client.get(reverse('signup')).status_code, 200)

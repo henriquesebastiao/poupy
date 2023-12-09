@@ -8,7 +8,7 @@ class AppTest(TestCase):
         self.assertEqual(reverse('app'), '/app/')
 
     def test_if_url_app_render_correct_view(self):
-        self.assertEqual(resolve('/app/').func.__name__, 'app')
+        self.assertEqual(resolve('/app/').view_name, 'app')
 
     def test_if_url_app_return_status_code_200(self):
         User.objects.create_user(

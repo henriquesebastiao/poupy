@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
 
@@ -19,6 +20,9 @@ class UserCreateView(CreateView):
     template_name = 'pages/app/signup.html'
     form_class = SignupForm
     success_url = reverse_lazy('login')
+
+    def get(self, request, *args, **kwargs):
+        raise Http404
 
     def form_valid(self, form):
         user = form.save(commit=False)
