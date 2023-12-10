@@ -1,10 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, UpdateView
 
 from ..forms import TransactionsEditForm
-from ..models import Transaction, User
+from ..models import Account, Transaction, Transfer, User
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
@@ -14,9 +16,16 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         user = User.objects.get(email=self.request.user.email)
-        all_transactions = Transaction.objects.filter(user=user).order_by(
-            '-id'
+        all_transactions = list(
+            Transaction.objects.filter(user=user).order_by('-id')
         )
+
+        all_transfers = list(
+            Transfer.objects.filter(user=user).order_by('-id')
+        )
+
+        # Combine transfers and transactions so that they are displayed on the transactions page
+        all_transactions.extend(all_transfers)
 
         context = super().get_context_data(**kwargs)
         context['all_transactions'] = all_transactions
@@ -32,8 +41,52 @@ class TransactionEditView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'transaction_id'
 
     def get_queryset(self):
-        return Transaction.objects.filter(user=self.request.user)
+        # If there is no transaction with this id, it means it is a transfer
+        try:
+            transaction = Transaction.objects.get(
+                user=self.request.user,
+            )
+        except Transaction.DoesNotExist:
+            transaction = Transfer.objects.filter(
+                user=self.request.user,
+                id=self.kwargs['transaction_id'],
+            )
+        return transaction
 
     def get_success_url(self):
         messages.success(self.request, 'Changes saved successfully.')
         return reverse_lazy('transactions')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Template information if the transaction is a transfer,
+        # in which case the delete button for this transaction will not be displayed.
+        context['transfer'] = self.object.type
+
+        return context
+
+
+class TransactionDeleteView(LoginRequiredMixin, View):
+    login_url = 'login'
+
+    @staticmethod
+    def post(request, transaction_id, *args, **kwargs):
+        transaction = Transaction.objects.get(id=transaction_id)
+
+        account = Account.objects.get(id=transaction.account.id)
+
+        if transaction.type == 'INCOME':
+            account.balance -= transaction.value
+        elif transaction.type == 'EXPANSE':
+            account.balance += transaction.value
+
+        # In the future, we will implement the logic for deleting a transfer,
+        # for now the delete button is not displayed when editing a transfer.
+
+        account.save()
+        transaction.delete()
+
+        messages.success(request, 'Transaction deleted successfully.')
+
+        return redirect('transactions')

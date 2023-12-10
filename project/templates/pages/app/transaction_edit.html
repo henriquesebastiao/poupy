@@ -3,8 +3,18 @@
     📝 Edit transaction | Poupy
 {% endblock %}
 {% block action_title %}
-	Edit transaction
+    Edit transaction
 {% endblock %}
 {% block button_text %}
-	Save
+    Save
 {% endblock %}
+{% block delete_button %}
+    {% if transfer != 'TRANSFER' %}
+        <!-- If it is a transfer, do not display the delete the transaction button. -->
+        <form class="form-btn-delete" action="{% url 'transaction_delete' transaction.id %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-delete">Delete transaction</button>
+        </form>
+    {% endif %}
+{% endblock %}
+

@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
-from ..models import Account, Transaction, User
+from ..models import Account, Transaction, Transfer, User
 
 
 class App(LoginRequiredMixin, View):
@@ -17,10 +17,28 @@ class App(LoginRequiredMixin, View):
         number_accounts = len(accounts)
         total_balance = sum([account.balance for account in accounts])
 
-        bigger_transactions_of_month = Transaction.objects.filter(
-            user=user,
-            transaction_date__month=datetime.now().month,
-        ).order_by('-value')[:3]
+        all_bigger_transactions_of_month = list(
+            Transaction.objects.filter(
+                user=user,
+                transaction_date__month=datetime.now().month,
+            ).order_by('-value')
+        )
+
+        all_bigger_transfer_of_month = list(
+            Transfer.objects.filter(
+                user=user,
+                transaction_date__month=datetime.now().month,
+            ).order_by('-value')
+        )
+
+        all_bigger_transactions_of_month.extend(all_bigger_transfer_of_month)
+
+        # Order by value and get the first 3
+        all_bigger_transactions_of_month = sorted(
+            all_bigger_transactions_of_month,
+            key=lambda transaction: transaction.value,
+            reverse=True,
+        )[:3]
 
         monthly_expenses = sum(
             [
@@ -44,15 +62,22 @@ class App(LoginRequiredMixin, View):
             ]
         )
 
-        bigger_transactions_of_month = [
-            {
-                'type': transaction.type,
-                'description': transaction.description,
-                'value': transaction.value,
-                'account': transaction.account.name,
-            }
-            for transaction in bigger_transactions_of_month
-        ]
+        bigger_transactions_of_month = []
+
+        for transaction in all_bigger_transactions_of_month:
+            if transaction.type == 'TRANSFER':
+                account_name = f'{transaction.account_origin} -> {transaction.account_destination}'
+            else:
+                account_name = transaction.account.name
+
+            bigger_transactions_of_month.append(
+                {
+                    'type': transaction.type,
+                    'description': transaction.description,
+                    'value': transaction.value,
+                    'account': account_name,
+                }
+            )
 
         return render(
             request,

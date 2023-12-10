@@ -38,3 +38,22 @@ class Transaction(models.Model):
 
     def __str__(self):
         return self.description
+
+
+class Transfer(models.Model):
+    description = models.CharField(max_length=255, null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    account_origin = models.ForeignKey(
+        Account, on_delete=models.CASCADE, related_name='account_origin'
+    )
+    account_destination = models.ForeignKey(
+        Account, on_delete=models.CASCADE, related_name='account_destination'
+    )
+    value = models.DecimalField(decimal_places=2, null=False, max_digits=14)
+    transaction_date = models.DateTimeField(null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    type = models.CharField(max_length=8, default='TRANSFER', null=False)
+
+    def __str__(self):
+        return self.description

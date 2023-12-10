@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.views.generic import FormView
 
 from ..forms import TransferForm
-from ..models import Account, Transaction
+from ..models import Account, Transfer
 
 
 class TransferView(LoginRequiredMixin, FormView):
@@ -33,31 +33,22 @@ class TransferCreateView(LoginRequiredMixin, FormView):
         )
 
         if account_origin.balance >= data['value']:
-            transaction_origin = Transaction(
+            transaction = Transfer(
                 description=data['description'],
                 user=self.request.user,
-                account=account_origin,
+                account_origin=account_origin,
+                account_destination=account_destination,
                 value=data['value'],
                 transaction_date=datetime.now(),
-                type=Transaction.TransactionType.TRANSFER,
             )
-            transaction_destination = Transaction(
-                description=data['description'],
-                user=self.request.user,
-                account=account_destination,
-                value=data['value'],
-                transaction_date=datetime.now(),
-                type=Transaction.TransactionType.TRANSFER,
-            )
-
-            transaction_origin.save()
-            transaction_destination.save()
 
             account_origin.balance -= data['value']
             account_destination.balance += data['value']
 
             account_origin.save()
             account_destination.save()
+
+            transaction.save()
 
             return redirect('app')
         else:

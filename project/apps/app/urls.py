@@ -12,7 +12,11 @@ from ..app.views.expanse import ExpanseCreateView, ExpanseView
 from ..app.views.income import IncomeCreateView, IncomeView
 from ..app.views.login import LoginCreateView, LoginView, logout_view
 from ..app.views.signup import SignupView, UserCreateView
-from ..app.views.transactions import TransactionEditView, TransactionsView
+from ..app.views.transactions import (
+    TransactionDeleteView,
+    TransactionEditView,
+    TransactionsView,
+)
 from ..app.views.transfer import TransferCreateView, TransferView
 
 urlpatterns = [
@@ -27,6 +31,11 @@ urlpatterns = [
         'transaction/<int:transaction_id>/edit/',
         TransactionEditView.as_view(),
         name='transaction_edit',
+    ),
+    path(
+        'transaction/<int:transaction_id>/delete/',
+        TransactionDeleteView.as_view(),
+        name='transaction_delete',
     ),
     path('accounts/', AccountListView.as_view(), name='accounts'),
     path(

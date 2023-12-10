@@ -70,3 +70,19 @@ form {
 .btn-save:hover {
     background: var(--color-success-500);
 }
+
+.form-btn-delete {
+    width: 15%;
+    margin: 0 auto;
+}
+
+.btn-delete {
+    background: var(--color-error-700);
+    border: var(--color-error-500) 1px solid;
+    font-size: .9rem;
+    margin-top: -15px;
+}
+
+.btn-delete:hover {
+    background: var(--color-error-500);
+}
