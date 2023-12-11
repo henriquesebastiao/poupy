@@ -62,4 +62,4 @@ jobs:
           pip install -r requirements-dev.txt
       - name: Run Tests
         run: |
-          task test
+          pytest -m "not functional_test" -s -x --cov=project -vv
