@@ -62,4 +62,5 @@ jobs:
           pip install -r requirements-dev.txt
       - name: Run Tests
         run: |
-          pytest -m "not functional_test" -s -x --cov=project -vv
+          python manage.py collectstatic --noinput
+          python manage.py test --noinput --parallel 4
