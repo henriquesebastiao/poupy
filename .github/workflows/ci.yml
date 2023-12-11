@@ -62,5 +62,10 @@ jobs:
           pip install -r requirements-dev.txt
       - name: Run Tests
         run: |
-          python manage.py collectstatic --noinput
-          python manage.py test --noinput --parallel 4
+          export DJANGO_SETTINGS_MODULE="project.settings"
+          export DEBUG="0"
+          export SECRET_KEY="E~%rmR.<hNjd~dTYs)-ndsO/E-wU:!CIj@K;R}:D,Q./EDdBfujgGzt+Fl=*j@NL"
+          export DATABASE_ENGINE="django.db.backends.sqlite3"
+          export DATABASE_NAME="db.sqlite3"
+          export ALLOWED_HOSTS="127.0.0.1, localhost"
+          pytest -m "not functional_test" -s -x --cov=project -vv
