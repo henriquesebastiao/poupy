@@ -68,4 +68,6 @@ jobs:
           export DATABASE_ENGINE="django.db.backends.sqlite3"
           export DATABASE_NAME="db.sqlite3"
           export ALLOWED_HOSTS="127.0.0.1, localhost"
+          python manage.py collectstatic --noinput
+          python manage.py migrate
           pytest -m "not functional_test" -s -x --cov=project -vv
