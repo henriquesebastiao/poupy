@@ -1,3 +1,5 @@
+"""Provides a function to make a headless Chrome browser."""
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
@@ -8,6 +10,15 @@ CHROMEDRIVER_PATH = BASE_DIR / 'bin' / CHROMEDRIVER_NAME
 
 
 def make_chrome_browser(*options):
+    """
+    Function to make a headless Chrome browser.
+
+    Args:
+        *options: options to add to the browser
+
+    Returns:
+        headless Chrome browser
+    """
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--headless')
 

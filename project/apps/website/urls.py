@@ -1,3 +1,5 @@
+"""URLs module for the website app."""
+
 from django.urls import path
 from django.views.generic import TemplateView
 

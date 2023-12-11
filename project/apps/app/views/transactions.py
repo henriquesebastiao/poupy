@@ -1,4 +1,7 @@
+"""Views for transactions."""
+
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -6,16 +9,18 @@ from django.views import View
 from django.views.generic import TemplateView, UpdateView
 
 from ..forms import TransactionsEditForm
-from ..models import Account, Transaction, Transfer, User
+from ..models import Account, Transaction, Transfer
 
 
 class TransactionsView(LoginRequiredMixin, TemplateView):
+    """Transactions view page."""
+
     login_url = 'login'
 
     template_name = 'pages/app/transactions.html'
 
     def get_context_data(self, **kwargs):
-        user = User.objects.get(email=self.request.user.email)
+        user = get_user_model().objects.get(email=self.request.user.email)
         all_transactions = list(
             Transaction.objects.filter(user=user).order_by('-id')
         )
@@ -33,6 +38,8 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
 
 
 class TransactionEditView(LoginRequiredMixin, UpdateView):
+    """Transaction edit view page."""
+
     login_url = 'login'
 
     model = Transaction
@@ -68,10 +75,13 @@ class TransactionEditView(LoginRequiredMixin, UpdateView):
 
 
 class TransactionDeleteView(LoginRequiredMixin, View):
+    """Transaction delete view."""
+
     login_url = 'login'
 
     @staticmethod
     def post(request, transaction_id, *args, **kwargs):
+        """Delete transaction if request method is POST."""
         transaction = Transaction.objects.get(id=transaction_id)
 
         account = Account.objects.get(id=transaction.account.id)

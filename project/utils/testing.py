@@ -1,3 +1,5 @@
+"""Provide base class for functional tests."""
+
 import time
 
 from django.test.selenium import LiveServerTestCase
@@ -11,6 +13,8 @@ from project.utils.browser import make_chrome_browser
 
 @mark.functional_test
 class FunctionalTestBase(LiveServerTestCase):
+    """Base class for functional tests."""
+
     def setUp(self) -> None:
         self.browser = make_chrome_browser()
         return super().setUp()
@@ -66,7 +70,7 @@ class FunctionalTestBase(LiveServerTestCase):
         password_input.send_keys(password)
         password_input.send_keys(Keys.ENTER)
 
-    def user_register(
+    def user_register(  # pylint: disable=too-many-arguments
         self,
         first_name: str = 'Tester',
         last_name: str = 'Last',
@@ -125,19 +129,22 @@ class FunctionalTestBase(LiveServerTestCase):
         Returns:
             input field
         """
-        if tag == 'input':
+        if tag == 'input':  # pylint: disable=no-else-return
             return self.browser.find_element(
                 By.XPATH, f'//{tag}[@{of}="{content}"]'
             )
-        elif tag == 'span' or tag == 'a':
+        elif tag in ('span', 'a'):
             return self.browser.find_element(
                 By.XPATH, f'//{tag}[{of}()="{content}"]'
             )
+        return None
 
     @staticmethod
     def value_send_keys(field: WebElement, value: str):
         """
-        This method deletes the `0.0` characters that are in the value field before inserting the actual value.
+        This method deletes the `0.0` characters that are in the value
+        field before inserting the actual value.
+
         Args:
             field: input field
             value: value to insert in the field

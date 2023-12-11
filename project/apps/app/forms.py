@@ -1,13 +1,22 @@
+"""Define the forms used in the application."""
+
 import re
+from dataclasses import dataclass
 
 from django import forms
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
 from .models import Account, Transaction
 
 
 def strong_password(password):
+    """
+    Validates that the password is strong enough, if not, raises a ValidationError.
+
+    Args:
+        password: The password to be validated.
+    """
     regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
 
     if not regex.match(password):
@@ -22,6 +31,8 @@ def strong_password(password):
 
 
 class SignupForm(forms.ModelForm):
+    """Form used to register a new user."""
+
     def __init__(self, *args, **kwargs):
         """To avoid having to overwrite the fields, I just define them as required"""
         super().__init__(*args, **kwargs)
@@ -47,8 +58,11 @@ class SignupForm(forms.ModelForm):
         label='Repeat your password',
     )
 
+    @dataclass
     class Meta:
-        model = User
+        """Meta class to define the model and the fields to be used."""
+
+        model = get_user_model()
         fields = [
             'first_name',
             'last_name',
@@ -82,7 +96,7 @@ class SignupForm(forms.ModelForm):
     def clean_email(self):
         """Validates that the email is unique"""
         email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
+        if get_user_model().objects.filter(email=email).exists():
             raise ValidationError('This email is already in use.')
         return email
 
@@ -101,6 +115,8 @@ class SignupForm(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
+    """Form used to authenticate a user."""
+
     username = forms.CharField(
         label='Username',
         widget=forms.TextInput(attrs={'placeholder': 'Enter your username'}),
@@ -114,7 +130,12 @@ class LoginForm(forms.Form):
 
 
 class AccountEditForm(forms.ModelForm):
+    """Form used to edit an account."""
+
+    @dataclass
     class Meta:
+        """Meta class to define the model and the fields to be used."""
+
         model = Account
         fields = [
             'name',
@@ -137,7 +158,12 @@ class AccountEditForm(forms.ModelForm):
 
 
 class TransactionsEditForm(forms.ModelForm):
+    """Form used to edit a transaction."""
+
+    @dataclass
     class Meta:
+        """Meta class to define the model and the fields to be used."""
+
         model = Transaction
         fields = [
             'description',
@@ -157,7 +183,12 @@ class TransactionsEditForm(forms.ModelForm):
 
 
 class NewTransactionForm(forms.ModelForm):
+    """Form used to create a new transaction."""
+
+    @dataclass
     class Meta:
+        """Meta class to define the model and the fields to be used."""
+
         model = Transaction
         fields = [
             'description',
@@ -176,12 +207,14 @@ class NewTransactionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
-        super(NewTransactionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         if user:
             self.fields['account'].queryset = Account.objects.filter(user=user)
 
 
 class TransferForm(forms.Form):
+    """Form used to transfer money between accounts."""
+
     description = forms.CharField(
         label='Description',
         widget=forms.TextInput(
@@ -210,6 +243,8 @@ class TransferForm(forms.Form):
 
 
 class DeleteAccountForm(forms.Form):
+    """Form used to delete an account."""
+
     account = forms.ModelChoiceField(
         queryset=Account.objects.all(),
         label='Account',

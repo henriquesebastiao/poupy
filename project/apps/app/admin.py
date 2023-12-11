@@ -1,3 +1,5 @@
+"""Items to be displayed in the Django Admin panel."""
+
 from django.contrib import admin
 
 from .models import Account, Transaction
@@ -5,6 +7,8 @@ from .models import Account, Transaction
 
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
+    """Account model admin panel."""
+
     list_display = [
         'name',
         'balance',
@@ -21,6 +25,8 @@ class AccountAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
+    """Transaction model admin panel."""
+
     list_display = [
         'type',
         'description',

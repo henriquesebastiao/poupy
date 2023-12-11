@@ -1,21 +1,27 @@
+"""Views for home page of the app."""
+
 from datetime import datetime
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import View
 
-from ..models import Account, Transaction, Transfer, User
+from ..models import Account, Transaction, Transfer
 
 
 class App(LoginRequiredMixin, View):
+    """View for the home page of the app."""
+
     login_url = 'login'
 
     @staticmethod
     def get(request):
-        user = User.objects.get(email=request.user.email)
+        """Return the home page of the app."""
+        user = get_user_model().objects.get(email=request.user.email)
         accounts = Account.objects.filter(user=user)
         number_accounts = len(accounts)
-        total_balance = sum([account.balance for account in accounts])
+        total_balance = sum(account.balance for account in accounts)
 
         all_bigger_transactions_of_month = list(
             Transaction.objects.filter(
@@ -41,25 +47,21 @@ class App(LoginRequiredMixin, View):
         )[:3]
 
         monthly_expenses = sum(
-            [
-                transaction.value
-                for transaction in Transaction.objects.filter(
-                    user=user,
-                    transaction_date__month=datetime.now().month,
-                    type='EXPENSE',
-                )
-            ]
+            transaction.value
+            for transaction in Transaction.objects.filter(
+                user=user,
+                transaction_date__month=datetime.now().month,
+                type='EXPENSE',
+            )
         )
 
         monthly_incomes = sum(
-            [
-                transaction.value
-                for transaction in Transaction.objects.filter(
-                    user=user,
-                    transaction_date__month=datetime.now().month,
-                    type='INCOME',
-                )
-            ]
+            transaction.value
+            for transaction in Transaction.objects.filter(
+                user=user,
+                transaction_date__month=datetime.now().month,
+                type='INCOME',
+            )
         )
 
         bigger_transactions_of_month = []

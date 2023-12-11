@@ -1,3 +1,5 @@
+"""Views for the Expanse app."""
+
 from datetime import datetime
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,16 +11,23 @@ from ..models import Account
 
 
 class ExpanseView(LoginRequiredMixin, FormView):
+    """View for the expanse page."""
+
     login_url = 'login'
 
     template_name = 'pages/app/new_expanse.html'
     form_class = NewTransactionForm
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(
+        self, **kwargs
+    ):  # pylint: disable=useless-parent-delegation
         return super().get_context_data(**kwargs)
 
 
 class ExpanseCreateView(LoginRequiredMixin, CreateView):
+    """View for creating a new expanse."""
+
+    # pylint: disable=duplicate-code
     login_url = 'login'
 
     form_class = NewTransactionForm

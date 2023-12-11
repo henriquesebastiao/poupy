@@ -1,3 +1,5 @@
+"""Views for the accounts app."""
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -9,7 +11,11 @@ from ..forms import AccountEditForm, DeleteAccountForm
 from ..models import Account
 
 
-class AccountListView(LoginRequiredMixin, ListView):
+class AccountListView(
+    LoginRequiredMixin, ListView
+):  # pylint: disable=too-many-ancestors
+    """List all accounts."""
+
     login_url = 'login'
 
     template_name = 'pages/app/accounts.html'
@@ -20,6 +26,8 @@ class AccountListView(LoginRequiredMixin, ListView):
 
 
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
+    """Update an account."""
+
     login_url = 'login'
 
     model = Account
@@ -33,6 +41,8 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class AccountCreateView(LoginRequiredMixin, CreateView):
+    """Create a new account."""
+
     login_url = 'login'
 
     model = Account
@@ -46,16 +56,22 @@ class AccountCreateView(LoginRequiredMixin, CreateView):
 
 
 class DeleteAccountView(LoginRequiredMixin, FormView):
+    """View to delete an account."""
+
     login_url = 'login'
 
     template_name = 'pages/app/delete_account.html'
     form_class = DeleteAccountForm
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(
+        self, **kwargs
+    ):  # pylint: disable=useless-parent-delegation
         return super().get_context_data(**kwargs)
 
 
 class DeleteAccountConfirmView(LoginRequiredMixin, View):
+    """View to confirm the deletion of an account."""
+
     login_url = 'login'
 
     form_class = DeleteAccountForm
@@ -63,6 +79,7 @@ class DeleteAccountConfirmView(LoginRequiredMixin, View):
 
     @staticmethod
     def post(request, *args, **kwargs):
+        """Delete the account if request is POST."""
         form = DeleteAccountForm(request.POST)
 
         if form.is_valid():

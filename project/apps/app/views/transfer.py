@@ -1,3 +1,5 @@
+"""Views for transfer app."""
+
 from datetime import datetime
 
 from django.contrib import messages
@@ -10,16 +12,22 @@ from ..models import Account, Transfer
 
 
 class TransferView(LoginRequiredMixin, FormView):
+    """Transfer view page."""
+
     login_url = 'login'
 
     template_name = 'pages/app/new_transfer.html'
     form_class = TransferForm
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(
+        self, **kwargs
+    ):  # pylint: disable=useless-parent-delegation
         return super().get_context_data(**kwargs)
 
 
 class TransferCreateView(LoginRequiredMixin, FormView):
+    """Transfer create view."""
+
     login_url = 'login'
 
     template_name = 'pages/app/new_transfer.html'
@@ -51,11 +59,13 @@ class TransferCreateView(LoginRequiredMixin, FormView):
             transaction.save()
 
             return redirect('app')
-        else:
-            messages.error(
-                self.request, 'Insufficient balance to make the transfer.'
-            )
-            return self.form_invalid(form)
+
+        # If the user does not have enough balance to make the transfer,
+        # an error message is displayed.
+        messages.error(
+            self.request, 'Insufficient balance to make the transfer.'
+        )
+        return self.form_invalid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, 'Error in data validation.')

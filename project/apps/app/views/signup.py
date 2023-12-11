@@ -1,3 +1,5 @@
+"""Views for signup."""
+
 from django.contrib import messages
 from django.http import Http404
 from django.urls import reverse_lazy
@@ -7,6 +9,8 @@ from ..forms import SignupForm
 
 
 class SignupView(FormView):
+    """Signup view page."""
+
     template_name = 'pages/app/signup.html'
     form_class = SignupForm
     success_url = reverse_lazy('login')
@@ -17,6 +21,8 @@ class SignupView(FormView):
 
 
 class UserCreateView(CreateView):
+    """Create user view."""
+
     template_name = 'pages/app/signup.html'
     form_class = SignupForm
     success_url = reverse_lazy('login')

@@ -1,3 +1,5 @@
+"""Views for login page."""
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -10,6 +12,8 @@ from ..forms import LoginForm
 
 
 class LoginView(FormView):
+    """View for login page."""
+
     template_name = 'pages/app/login.html'
     form_class = LoginForm
 
@@ -20,6 +24,8 @@ class LoginView(FormView):
 
 
 class LoginCreateView(FormView):
+    """View for login create."""
+
     template_name = 'pages/app/login.html'
     form_class = LoginForm
 
@@ -34,9 +40,10 @@ class LoginCreateView(FormView):
             login(self.request, authenticate_user)
             # Após o usuário se autenticar, redireciona ele para o app
             return redirect(reverse('app'))
-        else:
-            messages.error(self.request, 'Invalid credentials.')
-            return super().form_invalid(form)
+
+        # If the user is not authenticated, an error message is displayed.
+        messages.error(self.request, 'Invalid credentials.')
+        return super().form_invalid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, 'Error in data validation.')
@@ -45,6 +52,7 @@ class LoginCreateView(FormView):
 
 @login_required(login_url='login')
 def logout_view(request):
+    """View for logout."""
     if not request.POST:
         raise Http404()
 
