@@ -245,8 +245,14 @@ class TransferForm(forms.Form):
 class DeleteAccountForm(forms.Form):
     """Form used to delete an account."""
 
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['account'].queryset = Account.objects.filter(user=user)
+
     account = forms.ModelChoiceField(
-        queryset=Account.objects.all(),
+        queryset=Account.objects.none(),
         label='Account',
         widget=forms.Select(),
     )

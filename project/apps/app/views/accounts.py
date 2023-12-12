@@ -63,6 +63,11 @@ class DeleteAccountView(LoginRequiredMixin, FormView):
     template_name = 'pages/app/delete_account.html'
     form_class = DeleteAccountForm
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
     def get_context_data(
         self, **kwargs
     ):  # pylint: disable=useless-parent-delegation
@@ -74,27 +79,22 @@ class DeleteAccountConfirmView(LoginRequiredMixin, View):
 
     login_url = 'login'
 
-    form_class = DeleteAccountForm
-    success_url = reverse_lazy('app')
-
     @staticmethod
-    def post(request, *args, **kwargs):
+    def post(request):
         """Delete the account if request is POST."""
-        form = DeleteAccountForm(request.POST)
 
-        if form.is_valid():
-            account = Account.objects.get(
-                id=request.POST['account'],
-                user=request.user,
+        account = Account.objects.get(
+            id=request.POST['account'],
+            user=request.user,
+        )
+
+        if account.balance == 0:
+            account.delete()
+            messages.success(request, 'Account deleted successfully.')
+        else:
+            messages.error(
+                request,
+                'It is not possible to delete an account with a non-zero balance.',
             )
-
-            if account.balance == 0:
-                account.delete()
-                messages.success(request, 'Account deleted successfully.')
-            else:
-                messages.error(
-                    request,
-                    'It is not possible to delete an account with a non-zero balance.',
-                )
 
         return redirect('accounts')
