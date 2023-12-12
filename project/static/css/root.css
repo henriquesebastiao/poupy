@@ -139,3 +139,14 @@ body {
     border: var(--theme-border-base) solid var(--color-success-500);
     color: var(--color-success-500);
 }
+
+.message-not-found {
+    margin-top: 3rem;
+    font-size: 1.3rem;
+    user-select: none;
+}
+
+.icon-not-found {
+    font-size: 2.5rem;
+    margin-top: 1.5rem;
+}

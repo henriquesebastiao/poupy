@@ -45,6 +45,12 @@
                     </a>
                 {% endfor %}
             </div>
+            {% if accounts|length == 0 %}
+                <div class="message-not-found">
+                    <span>You don't have any registered accounts yet.</span>
+                </div>
+                <i class="icon-not-found fa-solid fa-ban"></i>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

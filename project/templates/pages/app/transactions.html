@@ -49,6 +49,11 @@
                 </a>
             </div>
         {% endfor %}
-
+        {% if all_transactions|length == 0 %}
+            <div class="message-not-found">
+                <span>You don't have any registered transactions yet.</span>
+            </div>
+            <i class="icon-not-found fa-solid fa-ban"></i>
+        {% endif %}
     </div>
 {% endblock %}

@@ -98,3 +98,7 @@ main {
 .link-transaction:hover {
     transform: scale(1.05);
 }
+
+.message-not-found {
+    margin-top: 0;
+}
