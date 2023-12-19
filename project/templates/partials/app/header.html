@@ -8,9 +8,6 @@
         <a class="menu-item" href="{% url 'transactions' %}">TRANSACTIONS</a>
     </div>
     <div class="menu-right">
-        <a href="#">
-            <i class="menu-right-icons fa-solid fa-user"></i>
-        </a>
         <form action="{% url 'logout' %}" method="post" class="exit-button">
             {% csrf_token %}
             <button type="submit">

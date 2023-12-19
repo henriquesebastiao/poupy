@@ -69,6 +69,7 @@ jobs:
           export DATABASE_NAME="db.sqlite3"
           export ALLOWED_HOSTS="127.0.0.1, localhost"
           python manage.py collectstatic --noinput
+          python manage.py check
           python manage.py migrate
           pytest -m "not functional_test" -s -x --cov=project -vv
       - name: Upload coverage reports to Codecov
