@@ -15,6 +15,7 @@ gunicorn = "^21.2.0"
 dj-database-url = "^2.1.0"
 whitenoise = {extras = ["brotli"], version = "^6.6.0"}
 django-debug-toolbar = "^4.2.0"
+docutils = "^0.20.1"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"

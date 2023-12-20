@@ -424,6 +424,17 @@ django = ">=3.2.4"
 sqlparse = ">=0.2"
 
 [[package]]
+name = "docutils"
+version = "0.20.1"
+description = "Docutils -- Python Documentation Utilities"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "docutils-0.20.1-py3-none-any.whl", hash = "sha256:96f387a2c5562db4476f09f13bbab2192e764cac08ebbf3a34a95d9b1e4a59d6"},
+    {file = "docutils-0.20.1.tar.gz", hash = "sha256:f08a4e276c3a1583a86dce3e34aba3fe04d02bba2dd51ed16106244e8a923e3b"},
+]
+
+[[package]]
 name = "flake8"
 version = "4.0.1"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -1120,4 +1131,4 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "622fe908582fe411c6f7ba78b7e54f9a4b746bb6039ad345c0dc795e6342c023"
+content-hash = "8c45ba199c1e6cc311a57979c112acee5adcdcc9e1503ade14c4a808b0d3d487"
