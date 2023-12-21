@@ -20,10 +20,6 @@ class TransactionFormUnitTest(TestCase):
         label = self.form.fields['value'].label
         self.assertEqual('Value', label)
 
-    def test_transaction_date_label_is_correct(self):
-        label = self.form.fields['transaction_date'].label
-        self.assertEqual('Transaction date', label)
-
     def test_type_label_is_correct(self):
         label = self.form.fields['type'].label
         self.assertEqual('Type', label)

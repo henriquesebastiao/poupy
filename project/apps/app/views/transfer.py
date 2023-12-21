@@ -1,7 +1,5 @@
 """Views for transfer app."""
 
-from datetime import datetime
-
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
@@ -47,7 +45,6 @@ class TransferCreateView(LoginRequiredMixin, FormView):
                 account_origin=account_origin,
                 account_destination=account_destination,
                 value=data['value'],
-                transaction_date=datetime.now(),
             )
 
             account_origin.balance -= data['value']

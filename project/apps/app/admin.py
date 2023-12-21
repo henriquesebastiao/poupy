@@ -33,7 +33,6 @@ class TransactionAdmin(admin.ModelAdmin):
         'value',
         'user_id',
         'account_id',
-        'transaction_date',
         'created_at',
         'updated_at',
     ]
@@ -44,7 +43,6 @@ class TransactionAdmin(admin.ModelAdmin):
         'value',
         'user_id',
         'account_id',
-        'transaction_date',
         'created_at',
         'updated_at',
     ]
@@ -52,7 +50,6 @@ class TransactionAdmin(admin.ModelAdmin):
         'type',
         'user_id',
         'account_id',
-        'transaction_date',
         'created_at',
         'updated_at',
     ]

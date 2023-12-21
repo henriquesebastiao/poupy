@@ -1,7 +1,5 @@
 """Views for income transactions."""
 
-from datetime import datetime
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, FormView
@@ -35,7 +33,6 @@ class IncomeCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         transaction = form.save(commit=False)
-        transaction.transaction_date = datetime.now()
         transaction.user_id = self.request.user.id
 
         transaction.type = Transaction.TransactionType.INCOME

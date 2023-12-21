@@ -169,7 +169,6 @@ class TransactionsEditForm(forms.ModelForm):
             'description',
             'account',
             'value',
-            'transaction_date',
             'type',
         ]
 
@@ -177,7 +176,6 @@ class TransactionsEditForm(forms.ModelForm):
             'description': 'Description',
             'account': 'Account',
             'value': 'Value',
-            'transaction_date': 'Transaction date',
             'type': 'Type',
         }
 

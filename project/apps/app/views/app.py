@@ -26,14 +26,14 @@ class App(LoginRequiredMixin, View):
         all_bigger_transactions_of_month = list(
             Transaction.objects.filter(
                 user=user,
-                transaction_date__month=datetime.now().month,
+                created_at__month=datetime.now().month,
             ).order_by('-value')
         )
 
         all_bigger_transfer_of_month = list(
             Transfer.objects.filter(
                 user=user,
-                transaction_date__month=datetime.now().month,
+                created_at__month=datetime.now().month,
             ).order_by('-value')
         )
 
@@ -50,7 +50,7 @@ class App(LoginRequiredMixin, View):
             transaction.value
             for transaction in Transaction.objects.filter(
                 user=user,
-                transaction_date__month=datetime.now().month,
+                created_at__month=datetime.now().month,
                 type='EXPENSE',
             )
         )
@@ -59,7 +59,7 @@ class App(LoginRequiredMixin, View):
             transaction.value
             for transaction in Transaction.objects.filter(
                 user=user,
-                transaction_date__month=datetime.now().month,
+                created_at__month=datetime.now().month,
                 type='INCOME',
             )
         )

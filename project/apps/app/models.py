@@ -5,22 +5,63 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class Account(models.Model):
+class CommonInfo(models.Model):
+    """
+    Abstract model for common fields in the models.
+    This model is used to avoid repeating the same fields in the models.
+
+    Attributes:
+        user: The user that created the transaction.
+        created_at: The date and time that the transaction was created.
+        updated_at: The date and time that the transaction was updated.
+    """
+
+    class Meta:
+        abstract = True
+
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def is_edited(self) -> bool:
+        """Check if the transfer was edited."""
+        if self.created_at.strftime(
+            '%Y-%m-%d %H:%M'
+        ) != self.updated_at.strftime('%Y-%m-%d %H:%M'):
+            return True
+        return False
+
+
+class TransactionMixin(models.Model):
+    """
+    Abstract model for common fields in the transactions.
+
+    Attributes:
+        description: The description of the transaction.
+        value: The value of the transaction.
+    """
+
+    class Meta:
+        abstract = True
+
+    description = models.CharField(max_length=255, null=False)
+    value = models.DecimalField(decimal_places=2, null=False, max_digits=14)
+
+
+class Account(CommonInfo):
     """Model for the Account."""
 
     name = models.CharField(max_length=55, null=False)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     balance = models.DecimalField(
         decimal_places=2, null=False, default=0.00, max_digits=14
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
 
-class Transaction(models.Model):
+class Transaction(CommonInfo, TransactionMixin):
     """Model for the Transaction."""
 
     class TransactionType(
@@ -32,13 +73,7 @@ class Transaction(models.Model):
         EXPENSE = 'EXPENSE', _('Despesa')
         TRANSFER = 'TRANSFER', _('Transferência')
 
-    description = models.CharField(max_length=255, null=False)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
-    value = models.DecimalField(decimal_places=2, null=False, max_digits=14)
-    transaction_date = models.DateTimeField(null=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     type = models.CharField(
         max_length=8,
         choices=TransactionType.choices,
@@ -50,21 +85,15 @@ class Transaction(models.Model):
         return self.description
 
 
-class Transfer(models.Model):
+class Transfer(CommonInfo, TransactionMixin):
     """Model for the Transfer."""
 
-    description = models.CharField(max_length=255, null=False)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     account_origin = models.ForeignKey(
         Account, on_delete=models.CASCADE, related_name='account_origin'
     )
     account_destination = models.ForeignKey(
         Account, on_delete=models.CASCADE, related_name='account_destination'
     )
-    value = models.DecimalField(decimal_places=2, null=False, max_digits=14)
-    transaction_date = models.DateTimeField(null=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     type = models.CharField(max_length=8, default='TRANSFER', null=False)
 
     def __str__(self):
