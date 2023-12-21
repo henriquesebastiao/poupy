@@ -13,6 +13,10 @@ from ..app.views.app import App
 from ..app.views.expanse import ExpanseCreateView, ExpanseView
 from ..app.views.income import IncomeCreateView, IncomeView
 from ..app.views.login import LoginCreateView, LoginView, logout_view
+from ..app.views.settings import (
+    UserApplicationUpdatePasswordView,
+    UserApplicationUpdateView,
+)
 from ..app.views.signup import SignupView, UserCreateView
 from ..app.views.transactions import (
     TransactionDeleteView,
@@ -77,5 +81,11 @@ urlpatterns = [
         'new-transfer/create/',
         TransferCreateView.as_view(),
         name='new_transfer_create',
+    ),
+    path('settings/', UserApplicationUpdateView.as_view(), name='settings'),
+    path(
+        'settings/new-password/',
+        UserApplicationUpdatePasswordView.as_view(),
+        name='new_password',
     ),
 ]

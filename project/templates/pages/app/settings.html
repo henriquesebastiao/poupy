@@ -1,0 +1,15 @@
+{% extends 'base/app/base_form.html' %}
+{% block title %}
+    🛠️ Settings | Poupy
+{% endblock %}
+{% block action_title %}
+    Settings
+{% endblock %}
+{% block button_text %}
+    Save
+{% endblock %}
+{% block button_edit_password %}
+    <div>
+        <a class="btn btn-delete btn-new-password" href="{% url 'new_password' %}">Edit password</a>
+    </div>
+{% endblock %}

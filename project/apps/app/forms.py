@@ -254,3 +254,64 @@ class DeleteAccountForm(forms.Form):
         label='Account',
         widget=forms.Select(),
     )
+
+
+class UserApplicationEditForm(forms.ModelForm):
+    """Form used to edit the user."""
+
+    @dataclass
+    class Meta:
+        """Meta class to define the model and the fields to be used."""
+
+        model = get_user_model()
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+        ]
+
+        labels = {
+            'first_name': 'First name',
+            'last_name': 'Last name',
+            'username': 'Username',
+            'email': 'Email',
+        }
+
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={'placeholder': 'Enter your first name'}
+            ),
+            'last_name': forms.TextInput(
+                attrs={'placeholder': 'Enter your last name'}
+            ),
+            'username': forms.TextInput(
+                attrs={'placeholder': 'Enter a username'}
+            ),
+            'email': forms.EmailInput(
+                attrs={'placeholder': 'Enter your best email'}
+            ),
+        }
+
+
+class UserApplicationEditPasswordForm(forms.ModelForm):
+    """Form used to edit the user password."""
+
+    @dataclass
+    class Meta:
+        """Meta class to define the model and the fields to be used."""
+
+        model = get_user_model()
+        fields = [
+            'password',
+        ]
+
+        labels = {
+            'password': 'New password',
+        }
+
+        widgets = {
+            'password': forms.PasswordInput(
+                attrs={'placeholder': 'Enter a new password'}
+            ),
+        }
