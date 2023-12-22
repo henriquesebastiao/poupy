@@ -22,7 +22,9 @@ class AccountListView(
     context_object_name = 'accounts'
 
     def get_queryset(self):
-        return Account.objects.filter(user=self.request.user)
+        return Account.objects.filter(user=self.request.user).only(
+            'id', 'name', 'balance'
+        )
 
 
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
@@ -37,7 +39,9 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'account_id'
 
     def get_queryset(self):
-        return Account.objects.filter(user=self.request.user)
+        return Account.objects.filter(user=self.request.user).only(
+            'name', 'balance'
+        )
 
 
 class AccountCreateView(LoginRequiredMixin, CreateView):

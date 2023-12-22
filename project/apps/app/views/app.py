@@ -27,14 +27,20 @@ class App(LoginRequiredMixin, View):
             Transaction.objects.filter(
                 user=user,
                 created_at__month=datetime.now().month,
-            ).order_by('-value')
+            )
+            .values('description', 'type', 'value', 'account')
+            .order_by('-value')[:3]
         )
 
         all_bigger_transfer_of_month = list(
             Transfer.objects.filter(
                 user=user,
                 created_at__month=datetime.now().month,
-            ).order_by('-value')
+            )
+            .values(
+                'description', 'type', 'account_origin', 'account_destination'
+            )
+            .order_by('-value')[:3]
         )
 
         all_bigger_transactions_of_month.extend(all_bigger_transfer_of_month)
@@ -52,7 +58,7 @@ class App(LoginRequiredMixin, View):
                 user=user,
                 created_at__month=datetime.now().month,
                 type='EXPENSE',
-            )
+            ).only('value')
         )
 
         monthly_incomes = sum(
@@ -61,7 +67,7 @@ class App(LoginRequiredMixin, View):
                 user=user,
                 created_at__month=datetime.now().month,
                 type='INCOME',
-            )
+            ).only('value')
         )
 
         bigger_transactions_of_month = []

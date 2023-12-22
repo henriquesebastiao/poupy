@@ -22,11 +22,15 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         user = get_user_model().objects.get(email=self.request.user.email)
         all_transactions = list(
-            Transaction.objects.filter(user=user).order_by('-id')
+            Transaction.objects.filter(user=user)
+            .order_by('-id')
+            .only('id', 'type', 'description', 'value', 'account')
         )
 
         all_transfers = list(
-            Transfer.objects.filter(user=user).order_by('-id')
+            Transfer.objects.filter(user=user)
+            .order_by('-id')
+            .only('id', 'type', 'description', 'value')
         )
 
         # Combine transfers and transactions so that they are displayed on the transactions page

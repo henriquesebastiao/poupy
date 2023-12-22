@@ -73,7 +73,6 @@ class UserApplicationUpdatePasswordView(LoginRequiredMixin, View):
 
         if form.is_valid():
             request.user.set_password(request.POST['password'].strip())
-            request.user.save()
             logout(request)
             messages.success(
                 request, 'Password changed successfully. Please login again.'
