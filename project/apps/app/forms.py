@@ -17,7 +17,9 @@ def strong_password(password):
     Args:
         password: The password to be validated.
     """
-    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z0-9@#$%^&+=!]).{8,}$')
+    regex = re.compile(
+        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z0-9@#$%^&+=!]).{8,}$'
+    )
 
     if not regex.match(password):
         raise ValidationError(
@@ -238,6 +240,26 @@ class TransferForm(forms.Form):
             attrs={'placeholder': 'Insert the value of transaction'}
         ),
     )
+
+    def clean(self):
+        """Validates that the account_origin and account_destination fields are not equal"""
+        cleaned_data = super().clean()
+        account_origin = cleaned_data.get('account_origin')
+        account_destination = cleaned_data.get('account_destination')
+
+        if account_origin == account_destination:
+            raise ValidationError(
+                {
+                    'account_destination': 'Source account and target account must be different.'
+                }
+            )
+
+        value = cleaned_data.get('value')
+
+        if value is None or value <= 0:
+            raise ValidationError(
+                {'value': 'Value must be greater than zero.'}
+            )
 
 
 class DeleteAccountForm(forms.Form):
