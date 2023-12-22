@@ -5,9 +5,6 @@
 <p align="center"><strong>Manage your personal budget.</strong></p>
 
 <p align="center">
-    <a href="https://github.com/henriquesebastiao/poupy">
-        <img src="https://img.shields.io/badge/Status-development-red" alt="Development status" />
-    </a>
     <a href="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml">
         <img src="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml/badge.svg" alt="CI status"/>
     </a>
