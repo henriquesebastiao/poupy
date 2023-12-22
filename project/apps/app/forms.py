@@ -315,6 +315,20 @@ class UserApplicationEditForm(forms.ModelForm):
             ),
         }
 
+    def clean_email(self):
+        """Validates that the email is unique"""
+        email = self.cleaned_data.get('email')
+        if get_user_model().objects.filter(email=email).exists():
+            raise ValidationError('This email is already in use.')
+        return email
+
+    def clean_username(self):
+        """Validates that the username is unique"""
+        username = self.cleaned_data.get('username')
+        if get_user_model().objects.filter(username=username).exists():
+            raise ValidationError('This username is already in use.')
+        return username
+
 
 class UserApplicationEditPasswordForm(forms.ModelForm):
     """Form used to edit the user password."""
