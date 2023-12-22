@@ -17,7 +17,7 @@ def strong_password(password):
     Args:
         password: The password to be validated.
     """
-    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$')
+    regex = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=.*[a-zA-Z0-9@#$%^&+=!]).{8,}$')
 
     if not regex.match(password):
         raise ValidationError(
