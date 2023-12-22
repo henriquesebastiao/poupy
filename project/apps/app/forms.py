@@ -281,6 +281,13 @@ class DeleteAccountForm(forms.Form):
 class UserApplicationEditForm(forms.ModelForm):
     """Form used to edit the user."""
 
+    def __init__(self, *args, **kwargs):
+        """To avoid having to overwrite the fields, I just define them as required"""
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].required = True
+        self.fields['username'].required = True
+        self.fields['email'].required = True
+
     @dataclass
     class Meta:
         """Meta class to define the model and the fields to be used."""
@@ -318,6 +325,7 @@ class UserApplicationEditForm(forms.ModelForm):
     def clean_email(self):
         """Validates that the email is unique"""
         email = self.cleaned_data.get('email')
+
         if get_user_model().objects.filter(email=email).exists():
             raise ValidationError('This email is already in use.')
         return email
