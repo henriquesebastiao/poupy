@@ -1,6 +1,8 @@
 """Define the models for the app."""
+from decimal import Decimal
 
 from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -23,15 +25,6 @@ class CommonInfo(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    @property
-    def is_edited(self) -> bool:
-        """Check if the transfer was edited."""
-        if self.created_at.strftime(
-            '%Y-%m-%d %H:%M'
-        ) != self.updated_at.strftime('%Y-%m-%d %H:%M'):
-            return True
-        return False
-
 
 class TransactionMixin(models.Model):
     """
@@ -46,7 +39,12 @@ class TransactionMixin(models.Model):
         abstract = True
 
     description = models.CharField(max_length=255, null=False)
-    value = models.DecimalField(decimal_places=2, null=False, max_digits=14)
+    value = models.DecimalField(
+        decimal_places=2,
+        null=False,
+        max_digits=14,
+        validators=[MinValueValidator(Decimal('0.00'))],
+    )
 
 
 class Account(CommonInfo):
@@ -54,7 +52,11 @@ class Account(CommonInfo):
 
     name = models.CharField(max_length=55, null=False)
     balance = models.DecimalField(
-        decimal_places=2, null=False, default=0.00, max_digits=14
+        decimal_places=2,
+        null=False,
+        default=0.00,
+        max_digits=14,
+        validators=[MinValueValidator(Decimal('0.00'))],
     )
 
     def __str__(self):
