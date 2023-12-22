@@ -72,7 +72,6 @@ class UserApplicationUpdatePasswordView(LoginRequiredMixin, View):
         form = UserApplicationEditPasswordForm(request.POST)
 
         if form.is_valid():
-            form.save(commit=False)
             request.user.set_password(request.POST['password'].strip())
             request.user.save()
             logout(request)
@@ -81,3 +80,11 @@ class UserApplicationUpdatePasswordView(LoginRequiredMixin, View):
             )
 
             return redirect('login')
+        else:
+            return render(
+                request,
+                'pages/app/new_password.html',
+                context={
+                    'form': form,
+                },
+            )

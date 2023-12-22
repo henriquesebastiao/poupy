@@ -86,3 +86,13 @@ form {
 .btn-delete:hover {
     background: var(--color-error-500);
 }
+
+.errorlist {
+    margin-top: .5rem;
+    font-size: .8rem;
+    list-style: none;
+}
+
+.errorlist li {
+    color: var(--color-error-500);
+}

@@ -297,6 +297,25 @@ class UserApplicationEditForm(forms.ModelForm):
 class UserApplicationEditPasswordForm(forms.ModelForm):
     """Form used to edit the user password."""
 
+    password = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Enter the new password'}
+        ),
+        error_messages={'required': 'You need to enter a new password'},
+        label='New password',
+        validators=[strong_password],
+    )
+
+    repeat_password = forms.CharField(
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Enter your new password again'}
+        ),
+        error_messages={'required': 'You need to repeat your new password'},
+        label='Repeat your new password',
+    )
+
     @dataclass
     class Meta:
         """Meta class to define the model and the fields to be used."""
@@ -315,3 +334,16 @@ class UserApplicationEditPasswordForm(forms.ModelForm):
                 attrs={'placeholder': 'Enter a new password'}
             ),
         }
+
+    def clean(self):
+        """Validates that the password and repeat_password fields are equal"""
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        repeat_password = cleaned_data.get('repeat_password')
+
+        if password != repeat_password:
+            raise ValidationError(
+                {
+                    'repeat_password': 'Password and password repeat must be equal.'
+                }
+            )
