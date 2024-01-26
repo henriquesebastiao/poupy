@@ -65,12 +65,6 @@ jobs:
           poetry install
       - name: Run Tests
         run: |
-          export DJANGO_SETTINGS_MODULE="project.settings"
-          export DEBUG="0"
-          export SECRET_KEY="E~%rmR.<hNjd~dTYs)-ndsO/E-wU:!CIj@K;R}:D,Q./EDdBfujgGzt+Fl=*j@NL"
-          export DATABASE_ENGINE="django.db.backends.sqlite3"
-          export DATABASE_NAME="db.sqlite3"
-          export ALLOWED_HOSTS="127.0.0.1, localhost"
           python manage.py collectstatic --noinput
           python manage.py check
           python manage.py migrate
