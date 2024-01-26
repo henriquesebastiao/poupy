@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "poupy"
 version = "0.1.0"
-description = "Poupy project"
+description = "A webapp for personal budget management made with Django. "
 authors = ["Henrique Sebastião <contato@henriquesebastiao.com>"]
-license = "GPL-3.0"
+license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -16,6 +16,7 @@ dj-database-url = "^2.1.0"
 whitenoise = {extras = ["brotli"], version = "^6.6.0"}
 django-debug-toolbar = "^4.2.0"
 docutils = "^0.20.1"
+python-decouple = "^3.8"
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"
