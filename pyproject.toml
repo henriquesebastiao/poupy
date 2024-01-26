@@ -17,6 +17,7 @@ whitenoise = {extras = ["brotli"], version = "^6.6.0"}
 django-debug-toolbar = "^4.2.0"
 docutils = "^0.20.1"
 python-decouple = "^3.8"
+sentry-sdk = {extras = ["django"], version = "^1.39.2"}
 
 [tool.poetry.group.dev.dependencies]
 taskipy = "^1.12.0"
