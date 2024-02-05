@@ -16,7 +16,7 @@
     </a>
 </p>
 
-<div align="center">Deploy: <a href="https://poupy.fly.dev/">https://poupy.fly.dev/</a></div>
+<div align="center">Deploy: <a href="https://poupy.fly.dev/app/login">https://poupy.fly.dev/</a></div>
 
 <p align="center">
     <img src="project/utils/img/screenshot.png" alt="Preview"/>
