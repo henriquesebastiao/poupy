@@ -29,7 +29,6 @@ pytest-django = "^4.7.0"
 coverage = "^7.3.2"
 pytest-cov = "^4.1.0"
 selenium = "^4.15.2"
-pylint = "^3.0.2"
 pylint-django = "^2.5.5"
 
 [build-system]
@@ -70,5 +69,4 @@ format = 'blue .  && isort .'
 test = 'pytest -m "not functional_test" -s -x --cov=project -vv'
 functional-test = 'pytest -m "functional_test"'
 coverage = 'coverage run -m pytest && coverage html'
-pylint = 'pylint $(git ls-files "*.py") --load-plugins=pylint_django project -v --rcfile=.pylintrc --exit-zero'
 pre-commit = 'task lint && python manage.py migrate && task pylint && task test && task functional-test'

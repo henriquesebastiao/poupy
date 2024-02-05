@@ -25,4 +25,8 @@
             <button class="btn btn-signup">Login</button>
         </div>
     </form>
+    <form action="{% url 'login_demo_user' %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-signup" style="width: 200px; margin-top: 20px">Login as DEMO USER</button>
+    </form>
 {% endblock %}

@@ -59,3 +59,15 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'Logout completed successfully.')
     return redirect(reverse('login'))
+
+
+def login_demo_user_view(request):
+    """View for login with demo user."""
+    user = authenticate(
+        request,
+        username='demo',
+        password='Demo@123',
+    )
+
+    login(request, user)
+    return redirect(reverse('app'))

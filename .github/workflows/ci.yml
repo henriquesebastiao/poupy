@@ -55,9 +55,6 @@ jobs:
       DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE }}
       DEBUG: ${{ secrets.DEBUG }}
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      DATABASE_ENGINE: ${{ secrets.DATABASE_ENGINE }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-      ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
