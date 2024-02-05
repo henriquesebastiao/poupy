@@ -16,6 +16,8 @@
     </a>
 </p>
 
+<div align="center">Deploy: <a href="https://poupy.fly.dev/">https://poupy.fly.dev/</a></div>
+
 <p align="center">
     <img src="project/utils/img/screenshot.png" alt="Preview"/>
 </p>
@@ -29,9 +31,8 @@ create your own categories and subcategories.
 ```shell
 git clone https://github.com/henriquesebastiao/poupy.git
 cd poupy
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+poetry install
+export DEBUG="1"
 python manage.py migrate
 python manage.py runserver
 ```
