@@ -58,6 +58,7 @@ class Account(CommonInfo):
         max_digits=14,
         validators=[MinValueValidator(Decimal('0.00'))],
     )
+    teste = models.IntegerField()
 
     def __str__(self):
         return self.name
