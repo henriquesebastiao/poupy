@@ -383,3 +383,4 @@ pyrightconfig.json
 /static
 
 .idea
+/staticfiles

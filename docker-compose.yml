@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  django-poupy:
+    container_name: django-poupy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./project:/project
+    env_file:
+      - .env
+    depends_on:
+      - postgres-poupy
+  postgres-poupy:
+    container_name: postgres-poupy
+    image: postgres:16.1-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - /data:/var/lib/postgresql/data/
+    env_file:
+      - .env

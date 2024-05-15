@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.11-slim-bullseye
+ARG PYTHON_VERSION=3.12-slim-bullseye
 
 FROM python:${PYTHON_VERSION}
 
@@ -15,14 +15,16 @@ RUN mkdir -p /code
 
 WORKDIR /code
 
-RUN pip install poetry
-COPY pyproject.toml poetry.lock /code/
-RUN poetry config virtualenvs.create false
-RUN poetry install --only main --no-root --no-interaction
+COPY requirements.txt /code/
+
+RUN python -m venv /venv && \
+  /venv/bin/pip install --upgrade pip && \
+  /venv/bin/pip install -r requirements.txt
+
 COPY . /code
 
-RUN python manage.py collectstatic --noinput
+RUN /venv/bin/python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "project.wsgi"]
+CMD ["/venv/bin/gunicorn", "--bind", ":8000", "--workers", "2", "project.wsgi"]
