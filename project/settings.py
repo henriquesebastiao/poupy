@@ -33,7 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', default=get_random_secret_key())
 DEBUG = config('DEBUG', default=False, cast=bool)
 SQLITE = config('SQLITE', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'server.henriquesebastiao.com']
 
 
 # Application definition
