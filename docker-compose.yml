@@ -1,6 +1,18 @@
 version: '3.9'
 
 services:
+  postgres-poupy:
+    container_name: postgres-poupy
+    image: postgres:16.1-alpine
+    ports:
+      - "5433:5433"
+    volumes:
+      - /data:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    environment:
+      - PGPORT=5433
+
   django-poupy:
     container_name: django-poupy
     build:
@@ -14,14 +26,3 @@ services:
       - .env
     depends_on:
       - postgres-poupy
-  postgres-poupy:
-    container_name: postgres-poupy
-    image: postgres:16.1-alpine
-    ports:
-      - "5433:5433"
-    volumes:
-      - /data:/var/lib/postgresql/data/
-    env_file:
-      - .env
-    environment:
-      - PGPORT=5433
