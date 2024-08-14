@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8081:8000"
+      - "8090:8000"
     volumes:
       - ./project:/project
     env_file:
