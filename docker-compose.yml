@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "8081:8000"
     volumes:
       - ./project:/project
     env_file:
@@ -18,8 +18,10 @@ services:
     container_name: postgres-poupy
     image: postgres:16.1-alpine
     ports:
-      - "5432:5432"
+      - "5433:5433"
     volumes:
       - /data:/var/lib/postgresql/data/
     env_file:
       - .env
+    environment:
+      - PGPORT=5433
