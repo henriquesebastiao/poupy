@@ -16,12 +16,6 @@
     </a>
 </p>
 
-<div align="center">Deploy: <a href="http://server.henriquesebastiao.com:8090/app/login">http://server.henriquesebastiao.com:8090/</a></div>
-
-<div align="center">Demo user:</div>
-<div align="center">User: <strong>test</strong></div>
-<div align="center">Password: <strong>Test@123</strong></div>
-
 <p align="center">
     <img src="project/utils/img/screenshot.png" alt="Preview"/>
 </p>
