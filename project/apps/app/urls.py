@@ -14,6 +14,7 @@ from ..app.views.expanse import ExpanseCreateView, ExpanseView
 from ..app.views.income import IncomeCreateView, IncomeView
 from ..app.views.login import (
     LoginCreateView,
+    LoginDemoCreateView,
     LoginView,
     logout_view,
 )
@@ -35,6 +36,11 @@ urlpatterns = [
     path('user-create/', UserCreateView.as_view(), name='user_create'),
     path('login/', LoginView.as_view(), name='login'),
     path('login/create/', LoginCreateView.as_view(), name='login_create'),
+    path(
+        'login/create-demo-user/',
+        LoginDemoCreateView.as_view(),
+        name='login_create_user_demo',
+    ),
     path('logout/', logout_view, name='logout'),
     path('transactions/', TransactionsView.as_view(), name='transactions'),
     path(

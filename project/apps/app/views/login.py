@@ -50,6 +50,31 @@ class LoginCreateView(FormView):
         return super().form_invalid(form)
 
 
+class LoginDemoCreateView(FormView):
+    """View for login demo user create."""
+
+    template_name = 'pages/app/login.html'
+    form_class = LoginForm
+
+    def form_valid(self, form):
+        authenticate_user = authenticate(
+            self.request,
+            username='demo',
+            password='dEmo@user1',
+        )
+
+        if authenticate_user is not None:
+            login(self.request, authenticate_user)
+            return redirect(reverse('app'))
+
+        messages.error(self.request, 'Demo user invalid')
+        return super().form_invalid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error in data validation.')
+        return super().form_invalid(form)
+
+
 @login_required(login_url='login')
 def logout_view(request):
     """View for logout."""

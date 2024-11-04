@@ -25,4 +25,18 @@
             <button class="btn btn-signup">Login</button>
         </div>
     </form>
+    <div style="text-align: center; margin: 10px 0px 10px 0px;">OR</div>
+
+    <!--
+    Pequea gambiarra para adicionar botão de login em uma conta de demonstração.
+    Contudo, esta conta deve ser criada manualmente logo após o deploy.
+    -->
+    <form action="{% url 'login_create' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="username" value="demo">
+        <input type="hidden" name="password" value="dEmo@user1">
+        <div class="btn-user-demo-container">
+            <a href="{% url 'login_create_user_demo' %}"><button class="btn-signup btn-user-demo">Login as User Demo</button></a>
+        </div>
+    </form>
 {% endblock %}

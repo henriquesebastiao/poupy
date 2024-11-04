@@ -94,6 +94,24 @@ form {
     background: var(--color-success-500);
 }
 
+.btn-user-demo {
+    padding: .5rem;
+    width: 100%;
+    border-radius: var(--theme-rounded-base);
+    background: var(--color-success-700);
+    border: var(--color-success-500) 1px solid;
+    color: white;
+    font-weight: 500;
+    transition: background .5s ease;
+}
+
+.btn-user-demo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Messages */
 .message {
     margin-top: 2rem;

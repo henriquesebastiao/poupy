@@ -29,6 +29,7 @@ pytest-cov = "^4.1.0"
 selenium = "^4.15.2"
 pylint-django = "^2.5.5"
 ignr = "^2.2"
+requests = "^2.32.3"
 
 [build-system]
 requires = ["poetry-core"]
@@ -70,3 +71,4 @@ functional-test = 'pytest -m "functional_test"'
 coverage = 'coverage run -m pytest && coverage html'
 pre-commit = 'task lint && python manage.py migrate && task pylint && task test && task functional-test'
 export-requirements = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
+update-chromedriver = "python scripts/update_chromedriver.py"
