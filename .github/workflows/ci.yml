@@ -55,7 +55,7 @@ jobs:
           python manage.py collectstatic --noinput
           python manage.py check
           python manage.py migrate
-          pytest -m "not functional_test" -s -x --cov=project -vv
+          poetry run task test
       - name: Store coverage files
         uses: actions/upload-artifact@v4
         with:
