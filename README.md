@@ -30,14 +30,14 @@ Entre na conta de demonstração clicando em `Login as User Demo`.
 
 ## Funcionalidades
 
-- **Adição de Contas Bancárias**: Adicione e gerencie várias contas bancárias.
-- **Registro de Receitas e Despesas**: Registre suas entradas e saídas de dinheiro para melhor controle.
-- **Transferência entre Contas**: Movimente saldo entre contas cadastradas.
-- **Dashboard Completo:**
-    - Saldo Total de todas as contas.
-    - Total de Entradas e Saídas Mensais para um resumo rápido do fluxo financeiro.
-    - Saldo por Conta para acompanhar a situação de cada conta individualmente.
-    - Maiores Movimentações: Exibe as três maiores movimentações do mês, destacando receitas e despesas mais significativas.
+- **Adição de contas bancárias**: Adicione e gerencie várias contas bancárias.
+- **Registro de receitas e despesas**: Registre suas entradas e saídas de dinheiro para melhor controle.
+- **Transferência entre contas**: Movimente saldo entre contas cadastradas.
+- **Dashboard completo:**
+    - Saldo total de todas as contas.
+    - Total de entradas e saídas mensais para um resumo rápido do fluxo financeiro.
+    - Saldo por conta para acompanhar a situação de cada conta individualmente.
+    - Maiores movimentações: Exibe as três maiores movimentações do mês, destacando receitas e despesas mais significativas.
 
 Tecnologias e ferramentas usadas no projeto:
 
