@@ -12,7 +12,8 @@ from .models import Account, Transaction
 
 def strong_password(password):
     """
-    Validates that the password is strong enough, if not, raises a ValidationError.
+    Validates that the password is strong enough,
+    if not, raises a ValidationError.
 
     Args:
         password: The password to be validated.
@@ -36,7 +37,10 @@ class SignupForm(forms.ModelForm):
     """Form used to register a new user."""
 
     def __init__(self, *args, **kwargs):
-        """To avoid having to overwrite the fields, I just define them as required"""
+        """
+        To avoid having to overwrite the fields,
+        I just define them as required
+        """
         super().__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['email'].required = True
@@ -109,11 +113,10 @@ class SignupForm(forms.ModelForm):
         repeat_password = cleaned_data.get('repeat_password')
 
         if password != repeat_password:
-            raise ValidationError(
-                {
-                    'repeat_password': 'Password and password repeat must be equal.'
-                }
-            )
+            raise ValidationError({
+                'repeat_password': 'Password and password '
+                'repeat must be equal.'
+            })
 
 
 class LoginForm(forms.Form):
@@ -242,24 +245,26 @@ class TransferForm(forms.Form):
     )
 
     def clean(self):
-        """Validates that the account_origin and account_destination fields are not equal"""
+        """
+        Validates that the account_origin and
+        account_destination fields are not equal
+        """
         cleaned_data = super().clean()
         account_origin = cleaned_data.get('account_origin')
         account_destination = cleaned_data.get('account_destination')
 
         if account_origin == account_destination:
-            raise ValidationError(
-                {
-                    'account_destination': 'Source account and target account must be different.'
-                }
-            )
+            raise ValidationError({
+                'account_destination': 'Source account and target '
+                'account must be different.'
+            })
 
         value = cleaned_data.get('value')
 
         if value is None or value <= 0:
-            raise ValidationError(
-                {'value': 'Value must be greater than zero.'}
-            )
+            raise ValidationError({
+                'value': 'Value must be greater than zero.'
+            })
 
 
 class DeleteAccountForm(forms.Form):
@@ -282,7 +287,10 @@ class UserApplicationEditForm(forms.ModelForm):
     """Form used to edit the user."""
 
     def __init__(self, *args, **kwargs):
-        """To avoid having to overwrite the fields, I just define them as required"""
+        """
+        To avoid having to overwrite the fields,
+        I just define them as required
+        """
         super().__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['username'].required = True
@@ -386,8 +394,7 @@ class UserApplicationEditPasswordForm(forms.ModelForm):
         repeat_password = cleaned_data.get('repeat_password')
 
         if password != repeat_password:
-            raise ValidationError(
-                {
-                    'repeat_password': 'Password and password repeat must be equal.'
-                }
-            )
+            raise ValidationError({
+                'repeat_password': 'Password and password '
+                'repeat must be equal.'
+            })

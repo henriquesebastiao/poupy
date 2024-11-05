@@ -17,9 +17,7 @@ class TransferView(LoginRequiredMixin, FormView):
     template_name = 'pages/app/new_transfer.html'
     form_class = TransferForm
 
-    def get_context_data(
-        self, **kwargs
-    ):  # pylint: disable=useless-parent-delegation
+    def get_context_data(self, **kwargs):  # pylint: disable=useless-parent-delegation
         return super().get_context_data(**kwargs)
 
 

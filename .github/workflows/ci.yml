@@ -1,6 +1,6 @@
 on: [ push, pull_request ]
 
-name: CI
+name: Test
 
 jobs:
   ruff:
@@ -52,7 +52,8 @@ jobs:
           python manage.py check
           python manage.py migrate
           pytest -m "not functional_test" -s -x --cov=project -vv
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Store coverage files
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: htmlcov

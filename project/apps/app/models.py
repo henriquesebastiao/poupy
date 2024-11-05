@@ -1,4 +1,5 @@
 """Define the models for the app."""
+
 from decimal import Decimal
 
 from django.contrib.auth import get_user_model
@@ -66,9 +67,7 @@ class Account(CommonInfo):
 class Transaction(CommonInfo, TransactionMixin):
     """Model for the Transaction."""
 
-    class TransactionType(
-        models.TextChoices
-    ):  # pylint: disable=too-many-ancestors
+    class TransactionType(models.TextChoices):  # pylint: disable=too-many-ancestors
         """Define the type of the transaction."""
 
         INCOME = 'INCOME', _('Receita')

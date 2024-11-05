@@ -8,8 +8,8 @@
     <a href="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml">
         <img src="https://github.com/henriquesebastiao/poupy/actions/workflows/ci.yml/badge.svg" alt="CI status"/>
     </a>
-    <a href="https://codecov.io/gh/henriquesebastiao/poupy" > 
-        <img src="https://codecov.io/gh/henriquesebastiao/poupy/graph/badge.svg?token=aoIdJEPHV5" alt="Codecov status"/> 
+    <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/henriquesebastiao/poupy" > 
+        <img src="https://coverage-badge.samuelcolvin.workers.dev/henriquesebastiao/poupy.svg" alt="Codecov status"/> 
     </a>
     <a href="https://github.com/henriquesebastiao/poupy/blob/main/LICENSE">
         <img alt="LICENSE" src="https://img.shields.io/github/license/henriquesebastiao/poupy"/>

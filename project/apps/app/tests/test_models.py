@@ -31,7 +31,7 @@ class ModelTest(TestCase):
         )
 
         self.assertTrue(isinstance(account, Account))
-        self.assertEqual(account.__str__(), account.name)
+        self.assertEqual(str(account), account.name)
 
     def test_transaction_creation(self):
         transaction = Transaction.objects.create(
@@ -42,7 +42,7 @@ class ModelTest(TestCase):
         )
 
         self.assertTrue(isinstance(transaction, Transaction))
-        self.assertEqual(transaction.__str__(), transaction.description)
+        self.assertEqual(str(transaction), transaction.description)
 
     def test_transfer_creation(self):
         transfer = Transfer.objects.create(
@@ -54,4 +54,4 @@ class ModelTest(TestCase):
         )
 
         self.assertTrue(isinstance(transfer, Transfer))
-        self.assertEqual(transfer.__str__(), transfer.description)
+        self.assertEqual(str(transfer), transfer.description)

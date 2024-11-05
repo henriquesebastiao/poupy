@@ -33,7 +33,8 @@ class TransactionsView(LoginRequiredMixin, TemplateView):
             .only('id', 'type', 'description', 'value')
         )
 
-        # Combine transfers and transactions so that they are displayed on the transactions page
+        # Combine transfers and transactions so that they
+        # are displayed on the transactions page
         all_transactions.extend(all_transfers)
 
         context = super().get_context_data(**kwargs)
@@ -72,7 +73,8 @@ class TransactionEditView(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
 
         # Template information if the transaction is a transfer,
-        # in which case the delete button for this transaction will not be displayed.
+        # in which case the delete button for this
+        # transaction will not be displayed.
         context['transfer'] = self.object.type
 
         return context

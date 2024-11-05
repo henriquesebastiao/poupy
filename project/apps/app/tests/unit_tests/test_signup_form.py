@@ -164,13 +164,11 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
 
     def test_user_created_can_login(self):
         """Test if the user created can login."""
-        self.form_data.update(
-            {
-                'username': 'tes_tuser',
-                'password': '@Pass123',
-                'repeat_password': '@Pass123',
-            }
-        )
+        self.form_data.update({
+            'username': 'tes_tuser',
+            'password': '@Pass123',
+            'repeat_password': '@Pass123',
+        })
 
         self.client.post(
             reverse('user_create'), data=self.form_data, follow=True

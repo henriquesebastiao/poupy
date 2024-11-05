@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -148,10 +149,12 @@ STATIC_ROOT = BASE_DIR / 'static'
 if not DEBUG:
     # Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   # noqa
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # noqa
 
-    # Turn on WhiteNoise storage backend that takes care of compressing static files
-    # and creating unique names for each version SO they can safely be cached forever.
+    # Turn on WhiteNoise storage backend that takes
+    # care of compressing static files
+    # and creating unique names for each version SO
+    # they can safely be cached forever.
     STATICFILES_STORAGE = (
         'whitenoise.storage.CompressedManifestStaticFilesStorage'
     )

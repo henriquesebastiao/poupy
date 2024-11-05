@@ -11,9 +11,7 @@ from ..forms import AccountEditForm, DeleteAccountForm
 from ..models import Account
 
 
-class AccountListView(
-    LoginRequiredMixin, ListView
-):  # pylint: disable=too-many-ancestors
+class AccountListView(LoginRequiredMixin, ListView):  # pylint: disable=too-many-ancestors
     """List all accounts."""
 
     login_url = 'login'
@@ -72,9 +70,7 @@ class DeleteAccountView(LoginRequiredMixin, FormView):
         kwargs.update({'user': self.request.user})
         return kwargs
 
-    def get_context_data(
-        self, **kwargs
-    ):  # pylint: disable=useless-parent-delegation
+    def get_context_data(self, **kwargs):  # pylint: disable=useless-parent-delegation
         return super().get_context_data(**kwargs)
 
 
@@ -98,7 +94,8 @@ class DeleteAccountConfirmView(LoginRequiredMixin, View):
         else:
             messages.error(
                 request,
-                'It is not possible to delete an account with a non-zero balance.',
+                'It is not possible to delete an '
+                'account with a non-zero balance.',
             )
 
         return redirect('accounts')

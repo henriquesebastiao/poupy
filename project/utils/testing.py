@@ -2,8 +2,8 @@
 
 import time
 
+import pytest
 from django.test.selenium import LiveServerTestCase
-from pytest import mark
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
@@ -11,7 +11,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from project.utils.browser import make_chrome_browser
 
 
-@mark.functional_test
+@pytest.mark.functional_test
 class FunctionalTestBase(LiveServerTestCase):
     """Base class for functional tests."""
 
@@ -20,7 +20,8 @@ class FunctionalTestBase(LiveServerTestCase):
         return super().setUp()
 
     def tearDown(self) -> None:
-        self.browser.quit()  # Is necessary to quit the browser to avoid memory leak
+        # Is necessary to quit the browser to avoid memory leak
+        self.browser.quit()
         return super().tearDown()
 
     @staticmethod

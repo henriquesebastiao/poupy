@@ -68,18 +68,16 @@ class App(LoginRequiredMixin, View):
 
         for transaction in all_bigger_transactions_of_month:
             if transaction.type == 'TRANSFER':
-                account_name = f'{transaction.account_origin} -> {transaction.account_destination}'
+                account_name = f'{transaction.account_origin} -> {transaction.account_destination}'  # noqa
             else:
                 account_name = transaction.account.name
 
-            bigger_transactions_of_month.append(
-                {
-                    'type': transaction.type,
-                    'description': transaction.description,
-                    'value': transaction.value,
-                    'account': account_name,
-                }
-            )
+            bigger_transactions_of_month.append({
+                'type': transaction.type,
+                'description': transaction.description,
+                'value': transaction.value,
+                'account': account_name,
+            })
 
         return render(
             request,

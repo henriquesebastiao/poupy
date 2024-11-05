@@ -2,6 +2,7 @@ import os
 import shutil
 import stat
 import zipfile
+from http import HTTPStatus
 
 import requests
 
@@ -12,7 +13,7 @@ BIN_DIR = os.path.join(os.path.dirname(__file__), '..', 'bin')
 
 response = requests.get(URL)
 
-if response.status_code == 200:
+if response.status_code == HTTPStatus.OK:
     data = response.json()
     url_download = data['channels']['Stable']['downloads']['chromedriver'][0][
         'url'
