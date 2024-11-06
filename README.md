@@ -28,6 +28,12 @@ Você pode acessar o aplicativo [aqui](https://poupy.henriquesebastiao.com/app/l
 
 Entre na conta de demonstração clicando em `Login as User Demo`.
 
+Você também pode visualizar o deploy do banco de dados usando **Adminer** neste [link](https://adminer.henriquesebastiao.com/?pgsql=projects_postgres&username=poupy&db=poupy&ns=public).
+
+Use a senha `poupy123`.
+
+> Este usuário é apenas para leitura, fique a vontade para bisbilhotar :)
+
 ## Funcionalidades
 
 - **Adição de contas bancárias**: Adicione e gerencie várias contas bancárias.
