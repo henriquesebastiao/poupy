@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8090:8000"
+      - "5010:8000"
     volumes:
       - ./project:/project
     env_file:
