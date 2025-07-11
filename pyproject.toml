@@ -5,6 +5,7 @@ description = "A webapp for personal budget management made with Django. "
 authors = ["Henrique Sebastião <contato@henriquesebastiao.com>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
