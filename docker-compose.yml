@@ -1,26 +1,32 @@
 services:
-  postgres-poupy:
-    container_name: postgres-poupy
+  database:
+    container_name: db-poupy
     image: postgres:16.1-alpine
     ports:
-      - "5433:5433"
+      - "5434:5434"
     volumes:
-      - /data:/var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
     env_file:
       - .env
     environment:
-      - PGPORT=5433
+      - PGPORT=5434
+    restart: always
 
-  django-poupy:
-    container_name: django-poupy
+  app:
+    container_name: app-poupy
+    image: poupy:latest
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "5010:8000"
+      - "9001:8000"
     volumes:
       - ./project:/project
     env_file:
       - .env
     depends_on:
-      - postgres-poupy
+      - database
+    restart: always
+
+volumes:
+  pgdata:

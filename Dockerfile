@@ -27,4 +27,4 @@ RUN /venv/bin/python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["/venv/bin/gunicorn", "--bind", ":8000", "--workers", "2", "project.wsgi"]
+ENTRYPOINT ["./entrypoint.sh"]
