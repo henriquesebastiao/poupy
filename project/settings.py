@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'project.apps.website',
     'project.apps.app',
     'debug_toolbar',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
