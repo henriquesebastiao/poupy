@@ -15,9 +15,7 @@ response = requests.get(URL)
 
 if response.status_code == HTTPStatus.OK:
     data = response.json()
-    url_download = data['channels']['Stable']['downloads']['chromedriver'][0][
-        'url'
-    ]
+    url_download = data['channels']['Stable']['downloads']['chromedriver'][0]['url']
 
     with requests.get(url_download, stream=True) as response:
         response.raise_for_status()

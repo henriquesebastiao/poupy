@@ -44,31 +44,23 @@ class UserApplicationPasswordEditTestForm(TestCase):
     def test_user_application_password_edit_invalid_form_witch_password_without_numbers(
         self,
     ):
-        form = self.mixin_validate_form(
-            'Test@abc', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('Test@abc', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_user_application_password_edit_invalid_form_witch_password_without_uppercase_letters(
         self,
     ):
-        form = self.mixin_validate_form(
-            'test@1234', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('test@1234', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_user_application_password_edit_invalid_form_witch_password_without_lowercase_letters(
         self,
     ):
-        form = self.mixin_validate_form(
-            'TEST@1234', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('TEST@1234', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_user_application_password_edit_invalid_form_witch_passwords_without_special_characters(
         self,
     ):
-        form = self.mixin_validate_form(
-            'Test1234', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('Test1234', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())

@@ -11,18 +11,12 @@ class AppTest(TestCase):
         self.assertEqual(resolve('/app/').view_name, 'app')
 
     def test_if_url_app_return_status_code_200(self):
-        User.objects.create_user(
-            username='test_user', password='test_password'
-        )
+        User.objects.create_user(username='test_user', password='test_password')
         self.client.login(username='test_user', password='test_password')
         self.assertEqual(self.client.get(reverse('app')).status_code, 200)
 
     def test_if_view_app_load_correct_template(self):
-        User.objects.create_user(
-            username='test_user', password='test_password'
-        )
+        User.objects.create_user(username='test_user', password='test_password')
         self.client.login(username='test_user', password='test_password')
 
-        self.assertTemplateUsed(
-            self.client.get(reverse('app')), 'pages/app/home.html'
-        )
+        self.assertTemplateUsed(self.client.get(reverse('app')), 'pages/app/home.html')

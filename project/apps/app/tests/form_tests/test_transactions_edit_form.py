@@ -23,9 +23,7 @@ class TransactionsEditTestForm(TestCase):
             'type': Transaction.TransactionType.EXPENSE,
         }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> TransactionsEditForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> TransactionsEditForm:
         data = self.data.copy()
 
         for field in args:

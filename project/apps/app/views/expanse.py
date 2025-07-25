@@ -33,9 +33,7 @@ class ExpanseCreateView(LoginRequiredMixin, CreateView):
         transaction = form.save(commit=False)
         transaction.user_id = self.request.user.id
 
-        account = Account.objects.get(
-            name=transaction.account.name, user=self.request.user
-        )
+        account = Account.objects.get(name=transaction.account.name, user=self.request.user)
         account.balance -= transaction.value
         account.save()
         return super().form_valid(form)

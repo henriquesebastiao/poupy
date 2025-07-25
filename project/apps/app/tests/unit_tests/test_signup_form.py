@@ -11,9 +11,7 @@ class SignupFormUnitTest(TestCase):
 
     # Test placeholders
     def test_first_name_placeholder_is_correct(self):
-        placeholder = self.form.fields['first_name'].widget.attrs[
-            'placeholder'
-        ]
+        placeholder = self.form.fields['first_name'].widget.attrs['placeholder']
         self.assertEqual('Enter your first name', placeholder)
 
     def test_last_name_placeholder_is_correct(self):
@@ -65,69 +63,43 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
     def test_field_username_cannot_be_empty(self):
         """Test if the form is invalid when the field username is empty."""
         self.form_data['username'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
+        self.assertIn('Invalid form, try again.', response.content.decode('utf-8'))
 
     def test_field_first_name_cannot_be_empty(self):
         """Test if the form is invalid when the field first_name is empty."""
         self.form_data['first_name'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
+        self.assertIn('Invalid form, try again.', response.content.decode('utf-8'))
 
     def test_field_last_name_cannot_be_empty(self):
         """Test that the form is not invalid even if the last_name field is empty."""
         self.form_data['last_name'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertNotIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
+        self.assertNotIn('Invalid form, try again.', response.content.decode('utf-8'))
 
     def test_field_email_cannot_be_empty(self):
         """Test if the form is invalid when the field email is empty."""
         self.form_data['email'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
+        self.assertIn('Invalid form, try again.', response.content.decode('utf-8'))
 
     def test_field_password_cannot_be_empty(self):
         """Test if the form is invalid when the field password is empty."""
         self.form_data['password'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
+        self.assertIn('Invalid form, try again.', response.content.decode('utf-8'))
 
     def test_field_repeat_password_cannot_be_empty(self):
         """Test if the form is invalid when the field repeat_password is empty."""
         self.form_data['repeat_password'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertIn(
-            'Invalid form, try again.', response.content.decode('utf-8')
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
+        self.assertIn('Invalid form, try again.', response.content.decode('utf-8'))
 
     def test_field_password_not_accept_weak_password(self):
         """Test if the form is invalid when the field password is weak."""
         self.form_data['password'] = 'abc'
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
         self.assertIn(
             'Password must have at least one uppercase letter, '
             'one lowercase letter and one number. '
@@ -138,9 +110,7 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
     def test_field_password_repeat_not_accept_different_password(self):
         """Test if the form is invalid when the field password and repeat_password are different."""
         self.form_data['repeat_password'] = 'ABCabc@123'
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
+        response = self.client.post(reverse('user_create'), data=self.form_data, follow=True)
         self.assertIn(
             'Password and password repeat must be equal.',
             response.content.decode('utf-8'),
@@ -149,9 +119,7 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
     def test_field_email_not_register_user_with_email_existing(self):
         """Test if the form is invalid when the field email is already in use."""
         form_data_with_email_existing = self.form_data
-        self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
+        self.client.post(reverse('user_create'), data=self.form_data, follow=True)
         response_with_email_existing = self.client.post(
             reverse('user_create'),
             data=form_data_with_email_existing,
@@ -170,9 +138,7 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
             'repeat_password': '@Pass123',
         })
 
-        self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
+        self.client.post(reverse('user_create'), data=self.form_data, follow=True)
 
         is_authenticated = self.client.login(
             username=self.form_data.get('username'),

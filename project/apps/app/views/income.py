@@ -37,9 +37,7 @@ class IncomeCreateView(LoginRequiredMixin, CreateView):
         transaction.save()
 
         # Update value in account
-        account = Account.objects.get(
-            name=transaction.account.name, user=self.request.user
-        )
+        account = Account.objects.get(name=transaction.account.name, user=self.request.user)
         account.balance += transaction.value
         account.save()
         return super().form_valid(form)

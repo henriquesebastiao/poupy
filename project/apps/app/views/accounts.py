@@ -20,9 +20,7 @@ class AccountListView(LoginRequiredMixin, ListView):  # pylint: disable=too-many
     context_object_name = 'accounts'
 
     def get_queryset(self):
-        return Account.objects.filter(user=self.request.user).only(
-            'id', 'name', 'balance'
-        )
+        return Account.objects.filter(user=self.request.user).only('id', 'name', 'balance')
 
 
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
@@ -37,9 +35,7 @@ class AccountUpdateView(LoginRequiredMixin, UpdateView):
     pk_url_kwarg = 'account_id'
 
     def get_queryset(self):
-        return Account.objects.filter(user=self.request.user).only(
-            'name', 'balance'
-        )
+        return Account.objects.filter(user=self.request.user).only('name', 'balance')
 
 
 class AccountCreateView(LoginRequiredMixin, CreateView):
@@ -94,8 +90,7 @@ class DeleteAccountConfirmView(LoginRequiredMixin, View):
         else:
             messages.error(
                 request,
-                'It is not possible to delete an '
-                'account with a non-zero balance.',
+                'It is not possible to delete an account with a non-zero balance.',
             )
 
         return redirect('accounts')

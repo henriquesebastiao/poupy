@@ -9,9 +9,7 @@ class AccountEditTestForm(TestCase):
         'balance': 100.00,
     }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> AccountEditForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> AccountEditForm:
         data = self.data.copy()
 
         for field in args:

@@ -32,9 +32,7 @@ class TransferCreateView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         data = form.cleaned_data
         account_origin = Account.objects.get(name=data['account_origin'])
-        account_destination = Account.objects.get(
-            name=data['account_destination']
-        )
+        account_destination = Account.objects.get(name=data['account_destination'])
 
         if account_origin.balance >= data['value']:
             transaction = Transfer(
@@ -57,9 +55,7 @@ class TransferCreateView(LoginRequiredMixin, FormView):
 
         # If the user does not have enough balance to make the transfer,
         # an error message is displayed.
-        messages.error(
-            self.request, 'Insufficient balance to make the transfer.'
-        )
+        messages.error(self.request, 'Insufficient balance to make the transfer.')
         return self.form_invalid(form)
 
     def form_invalid(self, form):

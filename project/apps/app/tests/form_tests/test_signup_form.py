@@ -13,9 +13,7 @@ class SignupTestForm(TestCase):
         'repeat_password': 'Test@1234',
     }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> SignupForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> SignupForm:
         data = self.data.copy()
 
         for field in args:
@@ -42,33 +40,25 @@ class SignupTestForm(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_signup_invalid_form_witch_password_without_numbers(self):
-        form = self.mixin_validate_form(
-            'Test@abc', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('Test@abc', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_signup_invalid_form_witch_password_without_uppercase_letters(
         self,
     ):
-        form = self.mixin_validate_form(
-            'test@1234', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('test@1234', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_signup_invalid_form_witch_password_without_lowercase_letters(
         self,
     ):
-        form = self.mixin_validate_form(
-            'TEST@1234', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('TEST@1234', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_signup_invalid_form_witch_password_without_special_characters(
         self,
     ):
-        form = self.mixin_validate_form(
-            'Test1234', 'password', 'repeat_password'
-        )
+        form = self.mixin_validate_form('Test1234', 'password', 'repeat_password')
         self.assertFalse(form.is_valid())
 
     def test_signup_valid_form_witch_first_name_blank(self):

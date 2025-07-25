@@ -16,9 +16,7 @@ class UserApplicationUpdateView(LoginRequiredMixin, View):
         Load the form with the current logged-in
         user data on the screen so that they can be edited
         """
-        form = UserApplicationEditForm(
-            data=request.POST or None, instance=request.user
-        )
+        form = UserApplicationEditForm(data=request.POST or None, instance=request.user)
 
         return render(
             request,
@@ -37,9 +35,7 @@ class UserApplicationUpdateView(LoginRequiredMixin, View):
         Returns:
             Redirect to app page
         """
-        form = UserApplicationEditForm(
-            data=request.POST or None, instance=request.user
-        )
+        form = UserApplicationEditForm(data=request.POST or None, instance=request.user)
 
         if form.is_valid():
             user = form.save(commit=False)
@@ -74,9 +70,7 @@ class UserApplicationUpdatePasswordView(LoginRequiredMixin, View):
         if form.is_valid():
             request.user.set_password(request.POST['password'].strip())
             logout(request)
-            messages.success(
-                request, 'Password changed successfully. Please login again.'
-            )
+            messages.success(request, 'Password changed successfully. Please login again.')
 
             return redirect('login')
         else:

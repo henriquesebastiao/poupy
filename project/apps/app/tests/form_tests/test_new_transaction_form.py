@@ -22,9 +22,7 @@ class NewTransactionTestForm(TestCase):
             'value': 100.00,
         }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> NewTransactionForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> NewTransactionForm:
         data = self.data.copy()
 
         for field in args:

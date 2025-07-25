@@ -13,9 +13,7 @@ class AccountFormUnitTest(TestCase):
         self.assertEqual('Enter account name', placeholder)
 
     def test_balance_placeholder_is_correct(self):
-        placeholder = self.form.base_fields['balance'].widget.attrs[
-            'placeholder'
-        ]
+        placeholder = self.form.base_fields['balance'].widget.attrs['placeholder']
         self.assertEqual('Enter account balance', placeholder)
 
     # Test labels

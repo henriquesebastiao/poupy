@@ -12,9 +12,7 @@ class UserApplicationEditTestForm(TestCase):
         'email': 'new@email.com',
     }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> UserApplicationEditForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> UserApplicationEditForm:
         data = self.data.copy()
 
         for field in args:

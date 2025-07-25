@@ -28,9 +28,7 @@ class AppFunctionalTest(FunctionalTestBase):
         self.assertIn('Monthly income', body.text)
         self.assertIn('Monthly expenses', body.text)
         self.assertIn('Total balance', body.text)
-        self.assertIn(
-            "It looks like you don't have any accounts yet.", body.text
-        )
+        self.assertIn("It looks like you don't have any accounts yet.", body.text)
 
         header = self.browser.find_element(By.TAG_NAME, 'header')
         self.assertIn('HOME', header.text)

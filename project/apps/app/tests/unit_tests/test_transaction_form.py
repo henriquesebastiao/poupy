@@ -31,9 +31,7 @@ class NewTransactionFormUnitTest(TestCase):
 
     # Test placeholders
     def test_description_placeholder_is_correct(self):
-        placeholder = self.form.fields['description'].widget.attrs[
-            'placeholder'
-        ]
+        placeholder = self.form.fields['description'].widget.attrs['placeholder']
         self.assertEqual('Insert the description of transaction', placeholder)
 
     def test_value_placeholder_is_correct(self):

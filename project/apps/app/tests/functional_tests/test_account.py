@@ -38,7 +38,5 @@ class AccountFunctionalTest(FunctionalTestBase):
         self.browser.get(self.live_server_url + '/app/')
         body = self.browser.find_element(By.TAG_NAME, 'body')
 
-        self.assertIn(
-            'Total balance', body.text
-        )  # Verify if this page is home
+        self.assertIn('Total balance', body.text)  # Verify if this page is home
         self.assertIn('R$ 1000,00', body.text)

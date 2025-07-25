@@ -9,9 +9,7 @@ class LoginTestForm(TestCase):
         'password': 'Test@1234',
     }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> LoginForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> LoginForm:
         data = self.data.copy()
 
         for field in args:

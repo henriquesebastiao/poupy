@@ -48,18 +48,14 @@ class SignupForm(forms.ModelForm):
 
     password = forms.CharField(
         required=True,
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter a secure password'}
-        ),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter a secure password'}),
         label='Password',
         validators=[strong_password],
     )
 
     repeat_password = forms.CharField(
         required=True,
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter your password again'}
-        ),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password again'}),
         error_messages={'required': 'You need to repeat your password'},
         label='Repeat your password',
     )
@@ -85,18 +81,10 @@ class SignupForm(forms.ModelForm):
         }
 
         widgets = {
-            'first_name': forms.TextInput(
-                attrs={'placeholder': 'Enter your first name'}
-            ),
-            'last_name': forms.TextInput(
-                attrs={'placeholder': 'Enter your last name'}
-            ),
-            'username': forms.TextInput(
-                attrs={'placeholder': 'Enter a username'}
-            ),
-            'email': forms.EmailInput(
-                attrs={'placeholder': 'Enter your best email'}
-            ),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Enter your first name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Enter your last name'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Enter a username'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter your best email'}),
         }
 
     def clean_email(self):
@@ -114,8 +102,7 @@ class SignupForm(forms.ModelForm):
 
         if password != repeat_password:
             raise ValidationError({
-                'repeat_password': 'Password and password '
-                'repeat must be equal.'
+                'repeat_password': 'Password and password repeat must be equal.'
             })
 
 
@@ -128,9 +115,7 @@ class LoginForm(forms.Form):
     )
     password = forms.CharField(
         label='Password',
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter your password'}
-        ),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter your password'}),
     )
 
 
@@ -153,12 +138,8 @@ class AccountEditForm(forms.ModelForm):
         }
 
         widgets = {
-            'name': forms.TextInput(
-                attrs={'placeholder': 'Enter account name'}
-            ),
-            'balance': forms.NumberInput(
-                attrs={'placeholder': 'Enter account balance'}
-            ),
+            'name': forms.TextInput(attrs={'placeholder': 'Enter account name'}),
+            'balance': forms.NumberInput(attrs={'placeholder': 'Enter account balance'}),
         }
 
 
@@ -203,9 +184,7 @@ class NewTransactionForm(forms.ModelForm):
             'description': forms.TextInput(
                 attrs={'placeholder': 'Insert the description of transaction'}
             ),
-            'value': forms.NumberInput(
-                attrs={'placeholder': 'Insert the value'}
-            ),
+            'value': forms.NumberInput(attrs={'placeholder': 'Insert the value'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -220,9 +199,7 @@ class TransferForm(forms.Form):
 
     description = forms.CharField(
         label='Description',
-        widget=forms.TextInput(
-            attrs={'placeholder': 'Insert the description of transaction'}
-        ),
+        widget=forms.TextInput(attrs={'placeholder': 'Insert the description of transaction'}),
     )
 
     account_origin = forms.ModelChoiceField(
@@ -239,9 +216,7 @@ class TransferForm(forms.Form):
 
     value = forms.DecimalField(
         label='Value',
-        widget=forms.NumberInput(
-            attrs={'placeholder': 'Insert the value of transaction'}
-        ),
+        widget=forms.NumberInput(attrs={'placeholder': 'Insert the value of transaction'}),
     )
 
     def clean(self):
@@ -255,16 +230,13 @@ class TransferForm(forms.Form):
 
         if account_origin == account_destination:
             raise ValidationError({
-                'account_destination': 'Source account and target '
-                'account must be different.'
+                'account_destination': 'Source account and target account must be different.'
             })
 
         value = cleaned_data.get('value')
 
         if value is None or value <= 0:
-            raise ValidationError({
-                'value': 'Value must be greater than zero.'
-            })
+            raise ValidationError({'value': 'Value must be greater than zero.'})
 
 
 class DeleteAccountForm(forms.Form):
@@ -316,18 +288,10 @@ class UserApplicationEditForm(forms.ModelForm):
         }
 
         widgets = {
-            'first_name': forms.TextInput(
-                attrs={'placeholder': 'Enter your first name'}
-            ),
-            'last_name': forms.TextInput(
-                attrs={'placeholder': 'Enter your last name'}
-            ),
-            'username': forms.TextInput(
-                attrs={'placeholder': 'Enter a username'}
-            ),
-            'email': forms.EmailInput(
-                attrs={'placeholder': 'Enter your best email'}
-            ),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Enter your first name'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Enter your last name'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Enter a username'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter your best email'}),
         }
 
     def clean_email(self):
@@ -351,9 +315,7 @@ class UserApplicationEditPasswordForm(forms.ModelForm):
 
     password = forms.CharField(
         required=True,
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter the new password'}
-        ),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter the new password'}),
         error_messages={'required': 'You need to enter a new password'},
         label='New password',
         validators=[strong_password],
@@ -361,9 +323,7 @@ class UserApplicationEditPasswordForm(forms.ModelForm):
 
     repeat_password = forms.CharField(
         required=True,
-        widget=forms.PasswordInput(
-            attrs={'placeholder': 'Enter your new password again'}
-        ),
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter your new password again'}),
         error_messages={'required': 'You need to repeat your new password'},
         label='Repeat your new password',
     )
@@ -382,9 +342,7 @@ class UserApplicationEditPasswordForm(forms.ModelForm):
         }
 
         widgets = {
-            'password': forms.PasswordInput(
-                attrs={'placeholder': 'Enter a new password'}
-            ),
+            'password': forms.PasswordInput(attrs={'placeholder': 'Enter a new password'}),
         }
 
     def clean(self):
@@ -395,6 +353,5 @@ class UserApplicationEditPasswordForm(forms.ModelForm):
 
         if password != repeat_password:
             raise ValidationError({
-                'repeat_password': 'Password and password '
-                'repeat must be equal.'
+                'repeat_password': 'Password and password repeat must be equal.'
             })

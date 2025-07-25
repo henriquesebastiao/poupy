@@ -131,13 +131,9 @@ class FunctionalTestBase(LiveServerTestCase):
             input field
         """
         if tag == 'input':  # pylint: disable=no-else-return
-            return self.browser.find_element(
-                By.XPATH, f'//{tag}[@{of}="{content}"]'
-            )
+            return self.browser.find_element(By.XPATH, f'//{tag}[@{of}="{content}"]')
         elif tag in ('span', 'a'):
-            return self.browser.find_element(
-                By.XPATH, f'//{tag}[{of}()="{content}"]'
-            )
+            return self.browser.find_element(By.XPATH, f'//{tag}[{of}()="{content}"]')
         return None
 
     @staticmethod

@@ -28,9 +28,7 @@ class TransferTestForm(TestCase):
             'value': 100.00,
         }
 
-    def mixin_validate_form(
-        self, string_to_validate: str, *args: str
-    ) -> TransferForm:
+    def mixin_validate_form(self, string_to_validate: str, *args: str) -> TransferForm:
         data = self.data.copy()
 
         for field in args:
@@ -69,17 +67,13 @@ class TransferTestForm(TestCase):
     def test_signup_invalid_form_witch_account_origin_equal_account_destination(
         self,
     ):
-        form = self.mixin_validate_form(
-            self.account_origin.id, 'account_destination'
-        )
+        form = self.mixin_validate_form(self.account_origin.id, 'account_destination')
         self.assertFalse(form.is_valid())
 
     def test_signup_invalid_form_witch_account_destination_equal_account_origin(
         self,
     ):
-        form = self.mixin_validate_form(
-            self.account_destination.id, 'account_origin'
-        )
+        form = self.mixin_validate_form(self.account_destination.id, 'account_origin')
         self.assertFalse(form.is_valid())
 
     def test_signup_invalid_form_witch_account_origin_not_exists(self):
