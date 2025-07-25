@@ -8,10 +8,17 @@ Eles são essenciais para a construção de APIs RESTful com Django REST Framewo
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from ..models import Account
 
-class AccountSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField(max_length=55)
-    balance = serializers.DecimalField(decimal_places=2, max_digits=14)
-    user = serializers.PrimaryKeyRelatedField(queryset=get_user_model().objects.all())
-    username = serializers.StringRelatedField(source='user.username', read_only=True)
+
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['id', 'name', 'balance', 'user', 'username']
+
+    username = serializers.SerializerMethodField(method_name='get_username', read_only=True)
+
+    def get_username(self, account):
+        """Obtém o nome de usuário do usuário associado à conta."""
+        user = get_user_model().objects.filter(id=account.user.id).first()
+        return user.username if user else None
