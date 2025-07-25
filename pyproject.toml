@@ -73,6 +73,7 @@ directory = "htmlcov"
 [tool.taskipy.tasks]
 lint = 'ruff check .; ruff check . --diff'
 format = 'ruff format .; ruff check . --fix'
+run = 'python manage.py runserver'
 pre_test = 'task lint'
 test = 'pytest -m "not functional_test" -s -x --cov=project -vv'
 functional-test = 'pytest -m "functional_test"'

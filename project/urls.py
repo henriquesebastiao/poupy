@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/', admin.site.urls),
     path('app/', include('project.apps.app.urls')),
+    path('api/', include('project.apps.app.api_urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
