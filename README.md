@@ -11,8 +11,17 @@
     <a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/henriquesebastiao/poupy" > 
         <img src="https://coverage-badge.samuelcolvin.workers.dev/henriquesebastiao/poupy.svg" alt="Codecov status"/> 
     </a>
+    <a href="https://github.com/henriquesebastiao/poupy/">
+        <img alt="Status Development" src="https://img.shields.io/badge/status-stable-%232FBF50"/>
+    </a>
+    <a href="https://poupy.henriquesebastiao.com/">
+        <img alt="Status" src="https://img.shields.io/website?url=https%3A%2F%2Fpoupy.henriquesebastiao.com%2F"/>
+    </a>
+    <a href="https://github.com/henriquesebastiao/poupy/releases/">
+        <img alt="Version" src="https://img.shields.io/github/v/release/henriquesebastiao/poupy?color=blue"/>
+    </a>
     <a href="https://github.com/henriquesebastiao/poupy/blob/main/LICENSE">
-        <img alt="LICENSE" src="https://img.shields.io/github/license/henriquesebastiao/poupy"/>
+        <img alt="LICENSE" src="https://img.shields.io/github/license/henriquesebastiao/poupy?color=blue"/>
     </a>
 </p>
 
