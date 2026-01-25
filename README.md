@@ -31,6 +31,9 @@
 
 Poupy é um aplicativo web para gerenciamento de orçamento e gastos pessoais, desenvolvido com Django. Ele permite o controle financeiro completo, incluindo a gestão de contas bancárias, receitas, despesas e transferências de saldo entre contas. Com um dashboard intuitivo, o usuário pode visualizar rapidamente um resumo financeiro mensal e manter suas finanças organizadas.
 
+> [!NOTE]
+> Uma vez que o projeto tenha sido desenvolvido para fins de estudo e o mesmo foi finalizado, não tendo seu desenvolvimento continuado, estarei arquivando este repositório na data de 2026-01-24.
+
 ## Deploy 🚀
 
 Você pode acessar o aplicativo [aqui](https://poupy.henriquesebastiao.com/app/login).
